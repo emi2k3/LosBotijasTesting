@@ -81,6 +81,20 @@ public class LoginTesting {
         }
 
 
+        @Test
+        public void LoginDual() { // Me falta informacion, esta explicado en mi documento.
+        LoginPage.openPage();
+                LoginPage.enterCedula("12345678"); //No tengo el usuario dual
+                LoginPage.enterPassword("password");//
+                LoginPage.clickLoginButton();
+                assertTrue(HomePage.isWelcomeTextDisplayed(), "Debería verse el texto de bienvenida al usuario");
+        
+
+        }
+
+
+
+
 
 
         // ======= SCROLL HASTA EL FONDO =======

@@ -88,6 +88,49 @@ public class FuncionarioTesting {
                 FuncionariosPage.clickCreateFuncionarioSubmit();
         }
 
+         @Test
+        public void CrearFuncionarioEmailYaUtilizado() {
+        LoginPage.openPage();
+                LoginPage.enterCedula("12345678");
+                LoginPage.enterPassword("password");
+                LoginPage.clickLoginButton();
+                assertTrue(HomePage.isWelcomeTextDisplayed(), "Debería verse el texto de bienvenida al usuario");
+                //Ver como navegar hacia gestion de funcionaria
+                //Apretar en el boton crear.
+                //Rellenar los campos (con un email creado)
+                //Click en boton guardar
+
+        }
+
+        
+           @Test
+        public void CrearFuncionarioCedulaYaUtilizado() {
+        LoginPage.openPage();
+                LoginPage.enterCedula("12345678");
+                LoginPage.enterPassword("password");
+                LoginPage.clickLoginButton();
+                assertTrue(HomePage.isWelcomeTextDisplayed(), "Debería verse el texto de bienvenida al usuario");
+                //Ver como navegar hacia gestion de funcionaria
+                //Apretar en el boton crear.
+                //Rellenar los campos (con un cedula creado)
+                //Click en boton guardar
+
+        }
+
+        @Test
+        public void CrearFuncionario() {
+        LoginPage.openPage();
+                LoginPage.enterCedula("12345678");
+                LoginPage.enterPassword("password");
+                LoginPage.clickLoginButton();
+                assertTrue(HomePage.isWelcomeTextDisplayed(), "Debería verse el texto de bienvenida al usuario");
+                //Ver como navegar hacia gestion de funcionaria
+                //Apretar en el boton crear.
+                //Rellenar los campos (camino feliz)
+                //Click en boton guardar
+
+        }
+
         // ======= SCROLL HASTA EL FONDO =======
         //JavascriptExecutor js = (JavascriptExecutor) driver;
         //js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
