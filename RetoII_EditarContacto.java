@@ -27,6 +27,9 @@ public class RetoII_EditarContacto {
     private By guardarCambiosButton = By.xpath("//button[@type='submit']");
     private By cancelarButton = By.xpath("//a[@href='http://reto2026.brazilsouth.cloudapp.azure.com/contactos/12']");
     private By errorMessage = By.className("invalid-feedback");
+    private By centroUnidadTextbox = By.id("centro_unidad");
+    private By rolFuncionario = By.id("rol");
+    private By estadoSelector = By.id("estado");
 
     // ======= CONSTRUCTOR =======
     public RetoII_EditarContacto(WebDriver driver) {
@@ -94,6 +97,24 @@ public class RetoII_EditarContacto {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage));
         return driver.findElement(errorMessage).getText();
+    }
+
+    public void editarCentroUnidad(String centroUnidad) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(centroUnidadTextbox)).clear();
+        driver.findElement(centroUnidadTextbox).sendKeys(centroUnidad);
+    }
+
+    public void selectRolFuncionario(String rol) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(rolFuncionario));
+        driver.findElement(rolFuncionario).sendKeys(rol);
+    }
+
+    public void selectEstado(String estado) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(estadoSelector));
+        driver.findElement(estadoSelector).sendKeys(estado);
     }
 
     // ======= GETTERS (para assertions) =======

@@ -38,7 +38,7 @@ public class RetoII_NuevoContacto {
     public void openPage() {
         driver.get(url);
     }
-    
+
     public void enterNombre(String nombre) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(nombreTextbox));

@@ -24,6 +24,7 @@ public class RetoII_ListadoContactos {
     private By nuevoContactoButton = By.xpath("//a[@href='http://reto2026.brazilsouth.cloudapp.azure.com/contactos/create']");
     private By editarContactoButton = By.xpath("//a[@title='Editar' and contains(@class,'btn-light')]");
     
+    
     // ======= CONSTRUCTOR =======
     public RetoII_ListadoContactos(WebDriver driver) {
         this.driver = driver;
@@ -39,7 +40,6 @@ public class RetoII_ListadoContactos {
         wait.until(ExpectedConditions.elementToBeClickable(nuevoContactoButton)).click();
     }
 
-    
     public void clickEditarContacto() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -65,7 +65,6 @@ public class RetoII_ListadoContactos {
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", boton);
         }
     }
-
 
     // ======= GETTERS (para assertions) =======
     public String getSuccessModalTitle() {
