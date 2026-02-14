@@ -13,10 +13,11 @@ public class LoginTesting {
     private WebDriver driver;
     private HomePage HomePage;
     private LoginPage LoginPage;
+    private SelectProfilePage SelectProfilePage;
 
     // CAMBIAR ESTO EN BASE AL ENTORNO QUE EJECUTA EL TESTING
-    private String path_to_extension = "C:\\DevTools\\Extensions\\2026.208.2004_0";
-    private String path_to_driver = "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe";
+private String path_to_extension = "C:\\Users\\Usuario\\OneDrive\\Escritorio\\InnovaAutomation\\2026.208.2004_0";
+private String path_to_driver = "C:\\Users\\Usuario\\OneDrive\\Escritorio\\InnovaAutomation\\edgedriver_win64\\msedgedriver.exe";
 
     // Setup
     @BeforeEach
@@ -38,6 +39,7 @@ public class LoginTesting {
 
         HomePage = new HomePage(driver);
         LoginPage = new LoginPage(driver);
+        SelectProfilePage=new SelectProfilePage(driver);
         }
 
         // TESTS
@@ -82,12 +84,14 @@ public class LoginTesting {
 
 
         @Test
-        public void LoginDual() { // Me falta informacion, esta explicado en mi documento.
+        public void LoginDual() { 
         LoginPage.openPage();
-                LoginPage.enterCedula("12345678"); //No tengo el usuario dual
-                LoginPage.enterPassword("password");//
+                 LoginPage.openPage();
+                LoginPage.enterCedula("6666666"); // es una cuenta dual.
+                LoginPage.enterPassword("password");
                 LoginPage.clickLoginButton();
-                assertTrue(HomePage.isWelcomeTextDisplayed(), "Debería verse el texto de bienvenida al usuario");
+             assertTrue(SelectProfilePage.isPageLoaded());
+             SelectProfilePage.selectProfile("contacto"); // contacto o funcionario (esto son los 2 que podes poner para seleccionar el perfil)
         
 
         }
@@ -180,7 +184,7 @@ public class LoginTesting {
     @AfterEach
         public void tearDown() {
                 if (driver != null) {
-                driver.quit();
+              //  driver.quit(); //cierra el edge.
                 }
         }
 }

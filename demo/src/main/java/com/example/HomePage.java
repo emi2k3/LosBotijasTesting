@@ -49,6 +49,10 @@ public class HomePage {
         driver.findElement(verGestionarUsuarioButton).click();
     }
 
+    public void clickVerGestionarContacto() {
+        driver.findElement(gestionarContactosButton).click();
+    }
+
     // ======= GETTERS (para assertions) =======
     public String getSuccessModalTitle() {
         return driver.findElement(successModalTitle).getText();

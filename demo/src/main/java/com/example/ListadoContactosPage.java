@@ -16,13 +16,15 @@ public class ListadoContactosPage {
     private WebDriver driver;
 
     // URL
-    private String url = "http://reto2026.brazilsouth.cloudapp.azure.com/";
+    private String url = "http://reto2026.brazilsouth.cloudapp.azure.com/contactos";
 
     // ======= LOCALIZADORES Y ELEMENTOS =======
     private By successModalTitle = By.id("example-modal-sizes-title-lg");
     
     private By nuevoContactoButton = By.xpath("//a[@href='http://reto2026.brazilsouth.cloudapp.azure.com/contactos/create']");
     private By editarContactoButton = By.xpath("//a[@title='Editar' and contains(@class,'btn-light')]");
+    private By eliminarContactoButton = By.xpath("//*[@id=\"app\"]/main/div/div[4]/div/div/div[1]/div/div[3]/button");
+   
     
     // ======= CONSTRUCTOR =======
     public ListadoContactosPage(WebDriver driver) {
@@ -47,6 +49,16 @@ public class ListadoContactosPage {
         WebElement boton = wait.until(
             ExpectedConditions.visibilityOfElementLocated(editarContactoButton)
         );
+}
+         public void clickBorrarContacto() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Esperar a que sea visible
+        WebElement boton = wait.until(
+            ExpectedConditions.visibilityOfElementLocated(eliminarContactoButton)
+        );
+
+       
 
         // Asegurar que no quede debajo de otros elementos
         ((JavascriptExecutor) driver).executeScript(

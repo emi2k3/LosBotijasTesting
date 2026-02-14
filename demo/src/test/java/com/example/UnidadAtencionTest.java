@@ -14,8 +14,8 @@ public class UnidadAtencionTest {
     private LoginPage LoginPage;
 
     // CAMBIAR SEGÚN ENTORNO
-    private String path_to_extension = "C:\\DevTools\\Extensions\\2026.208.2004_0";
-    private String path_to_driver = "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe";
+    private String path_to_extension = "C:\\Users\\Usuario\\OneDrive\\Escritorio\\InnovaAutomation\\2026.208.2004_0";
+    private String path_to_driver = "C:\\Users\\Usuario\\OneDrive\\Escritorio\\InnovaAutomation\\edgedriver_win64\\msedgedriver.exe"; 
 
     // ===== SETUP =====
     @BeforeEach

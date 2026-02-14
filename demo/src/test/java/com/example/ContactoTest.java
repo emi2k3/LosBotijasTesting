@@ -14,10 +14,11 @@ public class ContactoTest {
     private WebDriver driver;
     private HomePage HomePage;
     private LoginPage LoginPage;
+    private ListadoContactosPage ListadoContactosPage;
 
     // CAMBIAR SEGÚN ENTORNO
-    private String path_to_extension = "C:\\DevTools\\Extensions\\2026.208.2004_0";
-    private String path_to_driver = "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe";
+  private String path_to_extension = "C:\\Users\\Usuario\\OneDrive\\Escritorio\\InnovaAutomation\\2026.208.2004_0";
+private String path_to_driver = "C:\\Users\\Usuario\\OneDrive\\Escritorio\\InnovaAutomation\\edgedriver_win64\\msedgedriver.exe";
 
     // ===== SETUP =====
     @BeforeEach
@@ -35,11 +36,14 @@ public class ContactoTest {
 
         System.setProperty("webdriver.edge.driver", path_to_driver);
 
+
+        
         driver = new EdgeDriver(options);
         driver.manage().window().maximize();
 
         HomePage = new HomePage(driver);
         LoginPage = new LoginPage(driver);
+        ListadoContactosPage= new ListadoContactosPage(driver);
     }
 
     @Test
@@ -49,8 +53,9 @@ public class ContactoTest {
                 LoginPage.enterPassword("password");
                 LoginPage.clickLoginButton();
                 assertTrue(HomePage.isWelcomeTextDisplayed(), "Debería verse el texto de bienvenida al usuario");
-                //Ver como navegar hacia gestion usuario
-                //Ver como apretar en un contacto el boton eliminar.
+                HomePage.clickVerGestionarContacto();
+                ListadoContactosPage.clickBorrarContacto();
+            
 
         }
 
@@ -58,7 +63,7 @@ public class ContactoTest {
     @AfterEach
     public void tearDown() {
         if (driver != null) {
-            driver.quit();
+           // driver.quit();
         }
     }
 }
