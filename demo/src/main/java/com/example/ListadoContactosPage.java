@@ -19,7 +19,7 @@ public class ListadoContactosPage {
     private String url = "http://reto2026.brazilsouth.cloudapp.azure.com/contactos";
 
     // ======= LOCALIZADORES Y ELEMENTOS =======
-    private By successModalTitle = By.id("example-modal-sizes-title-lg");
+    private By barraDeBusqueda = By.id("buscador-contactos");
     
     private By nuevoContactoButton = By.xpath("//a[@href='http://reto2026.brazilsouth.cloudapp.azure.com/contactos/create']");
     private By editarContactoButton = By.xpath("//a[@title='Editar' and contains(@class,'btn-light')]");
@@ -68,8 +68,14 @@ public class ListadoContactosPage {
 
 
     // ======= GETTERS (para assertions) =======
-    public String getSuccessModalTitle() {
-        return driver.findElement(successModalTitle).getText();
+    public boolean isBarraDeBusquedaDisplayed() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(barraDeBusqueda));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
 
