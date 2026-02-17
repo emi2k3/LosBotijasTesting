@@ -1,5 +1,7 @@
 package com.example;
 import java.time.Duration;
+import java.util.Random;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
 
@@ -25,6 +27,8 @@ public class RegistroContactoPage {
     private By onlineCanalCheckbox = By.xpath("//input[@id='canal_online']");
     public By descriptionInput = By.xpath("//textarea[@name='descripcion']");
 
+    private By confirmButton = By.xpath("//button[@type='submit']");
+
 
 
 
@@ -40,20 +44,43 @@ public class RegistroContactoPage {
         driver.findElement(submitButton).click();
     }
 
-    public String generarCedulaValida() {
-        // Generar una cédula de ejemplo (8 dígitos seguidos de un dígito verificador)
-        String cedulaBase = "12345678"; // Puedes cambiar esto por cualquier número base
-        int suma = 0;
-        int[] multiplicadores = {2, 9, 8, 7, 6, 3, 4, 1}; // Multiplicadores para cada dígito
+    public void clickConfirmButton(){
+        driver.findElement(confirmButton).click();
+    }
 
-        for (int i = 0; i < cedulaBase.length(); i++) {
-            int digito = Character.getNumericValue(cedulaBase.charAt(i));
-            suma += digito * multiplicadores[i];
+    public String generarCedula() {
+        Random random = new Random();
+
+        // Generar número base de 7 dígitos (con ceros a la izquierda si es necesario)
+        int numeroBase = random.nextInt(10_000_000);
+        String base = String.format("%07d", numeroBase);
+
+        int[] coeficientes = {2, 9, 8, 7, 6, 3, 4};
+        int suma = 0;
+
+        // Calcular suma ponderada
+        for (int i = 0; i < 7; i++) {
+            int digito = Character.getNumericValue(base.charAt(i));
+            suma += digito * coeficientes[i];
         }
 
-        int digitoVerificador = (10 - (suma % 10)) % 10; // Cálculo del dígito verificador
-        return cedulaBase + digitoVerificador; // Retorna la cédula completa
+        int resto = suma % 10;
+        int digitoVerificador = (resto == 0) ? 0 : 10 - resto;
+
+        return base + digitoVerificador;
     }
+
+    public String generateRandomEmail() {
+        String chars = "abcdefghijklmnopqrstuvwxyz";
+        StringBuilder email = new StringBuilder();
+        Random rnd = new Random();
+        for (int i = 0; i < 10; i++) {
+            email.append(chars.charAt(rnd.nextInt(chars.length())));
+        }
+        email.append("@example.com");
+        return email.toString();
+    }
+
 
     public void RegisterStepOne(String name, String lastName, String cedula, String email, String phone, String password) {
         driver.findElement(nameInput).sendKeys(name);
