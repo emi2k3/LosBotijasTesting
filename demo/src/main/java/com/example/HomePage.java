@@ -25,6 +25,10 @@ public class HomePage {
     //Gestionar funcionarios
     private By verGestionarUsuarioButton = By.cssSelector(".btn.btn-secondary.btn-sm.px-3");
 
+    //Para hacer logout
+    private By userMenuButton = By.xpath("//span[@class='text-white fw-semibold']");
+    private By logoutButton = By.xpath("//button[normalize-space()='Cerrar sesión']");
+
 
     // ======= CONSTRUCTOR =======
     public HomePage(WebDriver driver) {
@@ -34,6 +38,12 @@ public class HomePage {
     // ======= ACCIONES =======
     public void openPage() {
         driver.get(url);
+    }
+
+    public void logout() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(userMenuButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
     }
     
     public void clickGestionarContactos() {

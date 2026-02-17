@@ -29,6 +29,8 @@ public class RegistroContactoPage {
 
     private By confirmButton = By.xpath("//button[@type='submit']");
 
+    //Error form message
+    private By formEmailError = By.xpath("//div[@class='invalid-feedback']");
 
 
 
@@ -100,6 +102,15 @@ public class RegistroContactoPage {
         driver.findElement(this.descriptionInput).sendKeys(description);
         driver.findElement(onlineCanalCheckbox).click();
         driver.findElement(submitButton).click();
+    }
+
+    public boolean isFormEmailErrorVisible() {
+        try {
+            driver.findElement(formEmailError);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
 }

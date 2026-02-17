@@ -57,6 +57,27 @@ public class RegisterTest {
         assertTrue(homePage.isWelcomeTextDisplayed(), "El texto de bienvenida se muestra, el registro fue exitoso.");
     }
 
+    @Test
+    void RegistroEmailUtilizado(){
+        loginPage.open();
+        loginPage.clickRegister();
+        String email = registroContactoPage.generateRandomEmail();
+        registroContactoPage.RegisterStepOne("Joe", "Doe", registroContactoPage.generarCedula(), email, "099000111", "!Hola123");
+        registroContactoPage.RegisterStepTwo("Comercial Joe", "Idea", "1 a 5", "Descripción de prueba para el registro de contacto.");
+        WebElement submit = driver.findElement(By.xpath("//button[@type='submit']"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior:'auto', block:'center'});", submit);
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(submit));
+        registroContactoPage.clickConfirmButton();
+        assertTrue(homePage.isWelcomeTextDisplayed(), "El texto de bienvenida se muestra, el primer registro fue exitoso.");
+
+        //Logout
+        homePage.logout();
+        //Volver a registrar con el mismo email
+        loginPage.clickRegister();
+        registroContactoPage.RegisterStepOne("Jane", "Smith", registroContactoPage.generarCedula(), email, "099000222", "!Hola123");
+        assertTrue(registroContactoPage.isFormEmailErrorVisible(), "Se muestra un mensaje de error indicando que el email ya está registrado.");
+    }
+
     @AfterEach
     void tearDown() {
         //driver.quit();
