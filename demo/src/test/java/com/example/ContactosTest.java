@@ -13,7 +13,7 @@ public class ContactosTest {
 
     private WebDriver driver;
     private LoginPage loginPage;
-    private NuevoContactoPage nuevoContactoPage;
+    private CrearContactoPage nuevoContactoPage;
     private HomePage homePage;
     private ListadoContactosPage listadoContactosPage;
 
@@ -25,7 +25,7 @@ public class ContactosTest {
         driver.manage().window().maximize();
 
         loginPage = new LoginPage(driver);
-        nuevoContactoPage = new NuevoContactoPage(driver);
+        nuevoContactoPage = new CrearContactoPage(driver);
         homePage = new HomePage(driver);
         listadoContactosPage = new ListadoContactosPage(driver);
 

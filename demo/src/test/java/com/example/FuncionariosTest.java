@@ -63,6 +63,7 @@ public class FuncionariosTest {
         // Force scrolling the document element to bottom (covers custom scroll containers)
         ((JavascriptExecutor) driver).executeScript("if(document.scrollingElement){document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;}else{window.scrollTo(0, document.body.scrollHeight);} ");
         // Finally ensure the submit is in view
+        WebElement submit = driver.findElement(By.id("submit")); // Adjust the locator as needed
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior:'auto', block:'center'});", submit);
 
         funcionariosPage.fillForm("juan", "perez", "6666666", "123456789", "juan.perez@demo.com", "password", "Consulta");
