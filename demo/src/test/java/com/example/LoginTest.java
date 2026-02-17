@@ -31,12 +31,26 @@ public class LoginTest {
     }
 
     @Test
-    void loginInvalido() {
+    void loginUsuarioInvalido() {
         loginPage.open();
-        loginPage.login("12345678", "wrong");
+        loginPage.login("999999999", "password");
         assertTrue(loginPage.isErrorVisible());
     }
 
+    @Test
+    void loginContraseñaInvalida() {
+        loginPage.open();
+        loginPage.login("12345678", "wrongpassword");
+        assertTrue(loginPage.isErrorVisible());
+    }
+
+    @Test
+    void loginCredencialesInvalidas() {
+        loginPage.open();
+        loginPage.login("999999999", "wrongpassword");
+        assertTrue(loginPage.isErrorVisible());
+    }
+    
     @AfterEach
     void tearDown() {
         //driver.quit();

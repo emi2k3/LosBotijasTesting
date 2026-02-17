@@ -13,6 +13,7 @@ public class LoginPage {
     private By loginButton = By.xpath("//button[@type='submit']");
     private By rememberCheckbox = By.id("remember");
     private By errorMessage = By.xpath("//strong[contains(text(),'incorrectos')]");
+    private By RegisterLink = By.xpath("//a[normalize-space()='Registrate para recibir nuestra ayuda']");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -36,4 +37,9 @@ public class LoginPage {
     public boolean isErrorVisible() {
         return driver.findElement(errorMessage).isDisplayed();
     }
+
+    public void clickRegister() {
+        driver.findElement(RegisterLink).click();
+    }
+
 }
