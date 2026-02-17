@@ -22,6 +22,10 @@ public class HomePage {
 
     private By welcomeText = By.xpath("//h1[@class='h3 fw-bold mb-1']");
 
+    private By homePageLoad = By.xpath("//h1[@class='h3 fw-bold mb-1' and text()='Hola, Carlos Rodríguez']");
+    
+    private By gestionarFuncionariosButton = By.xpath("//a[@href='http://reto2026.brazilsouth.cloudapp.azure.com/funcionarios']");
+
     //Gestionar funcionarios
     private By verGestionarUsuarioButton = By.cssSelector(".btn.btn-secondary.btn-sm.px-3");
 
@@ -57,6 +61,16 @@ public class HomePage {
 
     public void clickVerGestionarUsuario() {
         driver.findElement(verGestionarUsuarioButton).click();
+    }
+
+    public void clickGestionarFuncionarios() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(gestionarFuncionariosButton)).click();
+    }
+
+    public boolean isHomePageLoaded() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(homePageLoad)).isDisplayed();
     }
 
     // ======= GETTERS (para assertions) =======

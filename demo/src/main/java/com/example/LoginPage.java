@@ -42,4 +42,8 @@ public class LoginPage {
         driver.findElement(RegisterLink).click();
     }
 
+    public void clickLoginButton() {
+        driver.findElement(loginButton).click();
+    }
+
 }

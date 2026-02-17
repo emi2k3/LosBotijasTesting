@@ -20,7 +20,8 @@ public class RegisterTest {
 
     @BeforeEach
     void setUp() {
-        System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");
+        //System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
+        //System.setProperty("webdriver.edge.driver", "C:\\Users\\jleod\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe");//Nico D
         driver = new EdgeDriver();
         driver.manage().window().maximize();
         loginPage = new LoginPage(driver);
@@ -65,7 +66,18 @@ public class RegisterTest {
         registroContactoPage.RegisterStepOne("Joe", "Doe", registroContactoPage.generarCedula(), email, "099000111", "!Hola123");
         registroContactoPage.RegisterStepTwo("Comercial Joe", "Idea", "1 a 5", "Descripción de prueba para el registro de contacto.");
         WebElement submit = driver.findElement(By.xpath("//button[@type='submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior:'auto', block:'center'});", submit);
+        //Diferentes tipos de scroll porque no me anda el del profe
+        Actions actions = new Actions(driver);
+        try {
+            for (int i = 0; i < 3; i++) {
+                actions.sendKeys(Keys.END).perform();
+                Thread.sleep(200);
+            }
+        } catch (InterruptedException e) {
+            //si no anduvo no hacer nada.
+        }
+        // Force scrolling the document element to bottom (covers custom scroll containers)
+        ((JavascriptExecutor) driver).executeScript("if(document.scrollingElement){document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;}else{window.scrollTo(0, document.body.scrollHeight);} ");
         new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(submit));
         registroContactoPage.clickConfirmButton();
         assertTrue(homePage.isWelcomeTextDisplayed(), "El texto de bienvenida se muestra, el primer registro fue exitoso.");
