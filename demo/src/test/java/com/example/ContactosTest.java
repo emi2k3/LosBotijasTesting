@@ -1,14 +1,21 @@
 package com.example;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.Duration;
+
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.edge.*;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ContactosTest {
 
     private WebDriver driver;
     private LoginPage loginPage;
     private NuevoContactoPage nuevoContactoPage;
+    private HomePage homePage;
+    private ListadoContactosPage listadoContactosPage;
 
     @BeforeEach
     void setUp() {
@@ -18,9 +25,22 @@ public class ContactosTest {
 
         loginPage = new LoginPage(driver);
         nuevoContactoPage = new NuevoContactoPage(driver);
+        homePage = new HomePage(driver);
+        listadoContactosPage = new ListadoContactosPage(driver);
 
         loginPage.open();
         loginPage.login("12345678", "password");
+    }
+
+
+    @Test
+    void desactivarContactoComoFuncionario() {
+        // Este test asume que hay al menos un contacto registrado"
+        loginPage.open();
+        loginPage.login("12345678", "password");
+        assertTrue(homePage.isWelcomeTextDisplayed(), "El texto de bienvenida se muestra, el login fue exitoso.");
+        homePage.clickGestionarContactos();
+        //TEST CRASHEA POR LAS COOKIES, PENDIENTE DE SOLUCIONAR.
     }
 
     @Test

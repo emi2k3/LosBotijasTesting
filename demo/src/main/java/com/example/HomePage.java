@@ -18,7 +18,7 @@ public class HomePage {
 
     private By successModalTitle = By.id("example-modal-sizes-title-lg");
     
-    private By gestionarContactosButton = By.xpath("//a[@href='http://reto2026.brazilsouth.cloudapp.azure.com/contactos']");
+    private By gestionarContactosButton = By.xpath("//a[@class='btn btn-primary btn-sm px-3'][contains(text(),'Ver')]");
 
     private By welcomeText = By.xpath("//h1[@class='h3 fw-bold mb-1']");
 

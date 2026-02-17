@@ -16,7 +16,7 @@ public class ListadoContactosPage {
     private WebDriver driver;
 
     // URL
-    private String url = "http://reto2026.brazilsouth.cloudapp.azure.com/";
+    private String url = "http://reto2026.brazilsouth.cloudapp.azure.com/contactos";
 
     // ======= LOCALIZADORES Y ELEMENTOS =======
     private By successModalTitle = By.id("example-modal-sizes-title-lg");
