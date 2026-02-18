@@ -12,7 +12,7 @@ public class CrearProgramaPage {
     private WebDriver driver;
 
     // URL
-    private String url = "http://reto2026.brazilsouth.cloudapp.azure.com/";
+    private String url = "https://saltoinnova.brazilsouth.cloudapp.azure.com/";
 
     // ======= LOCALIZADORES Y ELEMENTOS =======
     private By crearProgramaText = By.xpath("//h2[@class='fw-normal mb-0']");

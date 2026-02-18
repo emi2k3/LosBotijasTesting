@@ -16,7 +16,7 @@ public class ListadoEvaluacionesPage {
     private WebDriver driver;
 
     // URL
-    private String url = "http://reto2026.brazilsouth.cloudapp.azure.com/evaluaciones";
+    private String url = "https://saltoinnova.brazilsouth.cloudapp.azure.com/evaluaciones";
 
     // ======= LOCALIZADORES Y ELEMENTOS =======
     private By listaDeEvaluacionesText = By.xpath("//h2[@class='fw-normal mb-0']");

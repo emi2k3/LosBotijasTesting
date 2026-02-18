@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.*;
 public class LoginPage {
 
     private WebDriver driver;
-    private String url = "http://reto2026.brazilsouth.cloudapp.azure.com/login";
+    private String url = "https://saltoinnova.brazilsouth.cloudapp.azure.com/login";
 
     /*
     12345678	admin_ti

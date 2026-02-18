@@ -12,7 +12,7 @@ public class HomePage {
     private WebDriver driver;
 
     // URL
-    private String url = "http://reto2026.brazilsouth.cloudapp.azure.com/";
+    private String url = "https://saltoinnova.brazilsouth.cloudapp.azure.com/";
 
     // ======= LOCALIZADORES Y ELEMENTOS =======
 

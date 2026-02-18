@@ -8,7 +8,8 @@ import org.openqa.selenium.support.ui.*;
 public class RegistroContactoPage {
 
     private WebDriver driver;
-    private String url = "http://reto2026.brazilsouth.cloudapp.azure.com/registro/contacto";
+    private String url = "https://saltoinnova.brazilsouth.cloudapp.azure.com/contactos/create";
+    private LoginVerificarPage loginVerificarPage;
 
 
     private By nameInput = By.xpath("//input[@placeholder='Pedro']");
@@ -36,6 +37,7 @@ public class RegistroContactoPage {
 
     public RegistroContactoPage(WebDriver driver) {
         this.driver = driver;
+        this.loginVerificarPage = new LoginVerificarPage(driver);
     }
 
     public void open() {

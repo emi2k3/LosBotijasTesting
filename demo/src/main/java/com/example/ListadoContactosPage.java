@@ -16,12 +16,12 @@ public class ListadoContactosPage {
     private WebDriver driver;
 
     // URL
-    private String url = "http://reto2026.brazilsouth.cloudapp.azure.com/contactos";
+    private String url = "https://saltoinnova.brazilsouth.cloudapp.azure.com/contactos";
 
     // ======= LOCALIZADORES Y ELEMENTOS =======
     private By barraDeBusqueda = By.id("buscador-contactos");
     
-    private By nuevoContactoButton = By.xpath("//a[@href='http://reto2026.brazilsouth.cloudapp.azure.com/contactos/create']");
+    private By nuevoContactoButton = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/contactos/create']");
     private By editarContactoButton = By.xpath("//a[@title='Editar' and contains(@class,'btn-light')]");
     
     // ======= CONSTRUCTOR =======

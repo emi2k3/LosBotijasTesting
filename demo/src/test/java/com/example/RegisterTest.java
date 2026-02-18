@@ -17,16 +17,18 @@ public class RegisterTest {
     private LoginPage loginPage;
     private RegistroContactoPage registroContactoPage;
     private HomePage homePage;
+    private LoginVerificarPage loginVerificarPage;
 
     @BeforeEach
     void setUp() {
-        //System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
+        System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
         //System.setProperty("webdriver.edge.driver", "C:\\Users\\jleod\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe");//Nico D
         driver = new EdgeDriver();
         driver.manage().window().maximize();
         loginPage = new LoginPage(driver);
         registroContactoPage = new RegistroContactoPage(driver);
         homePage = new HomePage(driver);
+        loginVerificarPage = new LoginVerificarPage(driver);
     }
 
     @Test
@@ -34,6 +36,7 @@ public class RegisterTest {
         loginPage.open();
         loginPage.clickRegister();
         registroContactoPage.RegisterStepOne("Joe", "Doe", registroContactoPage.generarCedula(), registroContactoPage.generateRandomEmail(), "099000111", "!Hola123");
+        loginVerificarPage.byPassCode();
         registroContactoPage.RegisterStepTwo("Comercial Joe", "Idea", "1 a 5", "Descripción de prueba para el registro de contacto.");
         WebElement submit = driver.findElement(By.xpath("//button[@type='submit']"));
 

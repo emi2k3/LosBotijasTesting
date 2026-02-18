@@ -20,6 +20,16 @@ public class LoginVerificarPage {
         this.driver = driver;
     }
 
+    //Metodos generales
+    public void byPassCode() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(ingresaElCodigoText));
+
+        String code = "000111"; // CODIGO FIJO PARA PRUEBAS, CAMBIENLO SI LOS LOQUITOS LO CAMBIAN EN EL BACKEND
+        fillCode(code);
+        clickSubmit();
+    }
+
     //Metodos
     public void open() {
         driver.get(url);
