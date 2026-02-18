@@ -17,7 +17,7 @@ public class RegisterTest {
     private LoginPage loginPage;
     private RegistroContactoPage registroContactoPage;
     private HomePage homePage;
-    private RegistroVerificarPage RegistroVerificarPage;
+    private RegistroVerificarPage registroVerificarPage;
 
     @BeforeEach
     void setUp() {
@@ -28,7 +28,7 @@ public class RegisterTest {
         loginPage = new LoginPage(driver);
         registroContactoPage = new RegistroContactoPage(driver);
         homePage = new HomePage(driver);
-        RegistroVerificarPage = new RegistroVerificarPage(driver);
+        registroVerificarPage = new RegistroVerificarPage(driver);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class RegisterTest {
         loginPage.open();
         loginPage.clickRegister();
         registroContactoPage.RegisterStepOne("Joe", "Doe", registroContactoPage.generarCedula(), registroContactoPage.generateRandomEmail(), "099000111", "!Hola123");
-        RegistroVerificarPage.byPassCode();
+        registroVerificarPage.byPassCode();
         registroContactoPage.RegisterStepTwo("Comercial Joe", "Idea", "1 a 5", "Descripción de prueba para el registro de contacto.");
         WebElement submit = driver.findElement(By.xpath("//button[@type='submit']"));
 
@@ -67,6 +67,7 @@ public class RegisterTest {
         loginPage.clickRegister();
         String email = registroContactoPage.generateRandomEmail();
         registroContactoPage.RegisterStepOne("Joe", "Doe", registroContactoPage.generarCedula(), email, "099000111", "!Hola123");
+        registroVerificarPage.byPassCode();
         registroContactoPage.RegisterStepTwo("Comercial Joe", "Idea", "1 a 5", "Descripción de prueba para el registro de contacto.");
         WebElement submit = driver.findElement(By.xpath("//button[@type='submit']"));
         //Diferentes tipos de scroll porque no me anda el del profe
@@ -99,6 +100,7 @@ public class RegisterTest {
         loginPage.clickRegister();
         String cedula = registroContactoPage.generarCedula();
         registroContactoPage.RegisterStepOne("Joe", "Doe", cedula, registroContactoPage.generateRandomEmail(), "099000111", "!Hola123");
+        registroVerificarPage.byPassCode();
         registroContactoPage.RegisterStepTwo("Comercial Joe", "Idea", "1 a 5", "Descripción de prueba para el registro de contacto.");
         WebElement submit = driver.findElement(By.xpath("//button[@type='submit']"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior:'auto', block:'center'});", submit);
