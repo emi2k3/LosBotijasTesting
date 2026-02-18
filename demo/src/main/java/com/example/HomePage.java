@@ -17,17 +17,39 @@ public class HomePage {
     // ======= LOCALIZADORES Y ELEMENTOS =======
 
     private By successModalTitle = By.id("example-modal-sizes-title-lg");
-    
-    private By gestionarContactosButton = By.xpath("//a[@class='btn btn-primary btn-sm px-3'][contains(text(),'Ver')]");
 
     private By welcomeText = By.xpath("//h1[@class='h3 fw-bold mb-1']");
 
     private By homePageLoad = By.xpath("//h1[@class='h3 fw-bold mb-1' and text()='Hola, Carlos Rodríguez']");
-    
-    private By gestionarFuncionariosButton = By.xpath("//a[@href='http://reto2026.brazilsouth.cloudapp.azure.com/funcionarios']");
 
     //Gestionar funcionarios
     private By verGestionarUsuarioButton = By.cssSelector(".btn.btn-secondary.btn-sm.px-3");
+    private By crearFuncionarioButton = By.cssSelector(".btn.btn-outline-secondary.btn-sm.px-3");
+
+    //Gestionar contactos
+    private By gestionarContactosButton = By.xpath("//a[@class='btn btn-primary btn-sm px-3'][contains(text(),'Ver')]");
+
+    //Agenda Reuniones
+    private By verAgendaReunionesButton = By.xpath("//a[@class='btn btn-success btn-sm px-3'][contains(text(),'Ver')]");
+
+    //Segimiento Evaluaciones
+    private By seguimientoEvaluacionesButton = By.xpath("//a[@class='btn btn-warning btn-sm text-white px-3'][contains(text(),'Evaluaciones')]");
+    private By resultadoEvaluacionesButton = By.xpath("//a[@class='btn btn-outline-warning btn-sm px-3 text-dark border-warning'][contains(text(),'Resultados')]");
+
+    //Catalogo Programas
+    private By vercatalogoProgramasButton = By.xpath("//a[@class='btn btn-info btn-sm text-white px-3'][contains(text(),'Ver')]");
+    private By crearCatalogoProgramasButton = By.xpath("//a[@class='btn btn-outline-info btn-sm px-3 text-dark border-info'][contains(text(),'Crear')]");
+
+    //Gestion Postulaciones
+    private By verPostulacionesButton = By.xpath("//a[@class='btn btn-danger btn-sm px-3'][contains(text(),'Ver postulaciones')]");
+    private By administrarPostulacionesButton = By.xpath("//a[@class='btn btn-outline-danger btn-sm px-3'][contains(text(),'Administrar')]");
+
+    //Seguimiento Planes de accion
+    private By planesButton = By.xpath("//a[@class='btn btn-primary btn-sm px-3'][contains(text(),'Planes')]");
+    private By accionesButton = By.xpath("//a[@class='btn btn-outline-primary btn-sm px-3'][contains(text(),'Acciones')]");
+
+    //Unidades de atencion
+    private By verUnidadesAtencionButton = By.xpath("//a[@class='btn btn-outline-primary btn-sm px-3'][contains(text(),'Ver todas')]");
 
     //Para hacer logout
     private By userMenuButton = By.xpath("//span[@class='text-white fw-semibold']");
@@ -63,14 +85,17 @@ public class HomePage {
         driver.findElement(verGestionarUsuarioButton).click();
     }
 
-    public void clickGestionarFuncionarios() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(gestionarFuncionariosButton)).click();
-    }
-
     public boolean isHomePageLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(homePageLoad)).isDisplayed();
+    }
+
+    public void clickCrearFuncionario() {
+        driver.findElement(crearFuncionarioButton).click();
+    }
+
+     public void clickVerAgendaReuniones() {
+        driver.findElement(verAgendaReunionesButton).click();
     }
 
     // ======= GETTERS (para assertions) =======
