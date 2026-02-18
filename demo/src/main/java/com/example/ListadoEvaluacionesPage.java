@@ -23,6 +23,8 @@ public class ListadoEvaluacionesPage {
 
     private By nuevaEvaluacionButton = By.xpath("//button[normalize-space()='Crear nueva evaluación']");
     private By volverButton = By.xpath("//a[@class='btn btn-outline-secondary rounded-pill']");
+    private By responderEvaluacionButton = By.xpath("//button[normalize-space()='Responder evaluación']");
+
 
     // ======= CONSTRUCTOR =======
     public ListadoEvaluacionesPage(WebDriver driver) {
@@ -42,6 +44,11 @@ public class ListadoEvaluacionesPage {
     public void clickVolver() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(volverButton)).click();
+    }
+
+    public void clickResponderEvaluacion() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(responderEvaluacionButton)).click();
     }
 
     // ======= GETTERS (para assertions) =======

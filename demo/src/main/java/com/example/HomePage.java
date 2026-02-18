@@ -98,6 +98,42 @@ public class HomePage {
         driver.findElement(verAgendaReunionesButton).click();
     }
 
+    public void clickSeguimientoEvaluaciones() {
+        driver.findElement(seguimientoEvaluacionesButton).click();
+    }
+
+    public void clickResultadoEvaluaciones() {
+        driver.findElement(resultadoEvaluacionesButton).click();
+    }
+
+    public void clickVerCatalogoProgramas() {
+        driver.findElement(vercatalogoProgramasButton).click();
+    }
+
+    public void clickCrearCatalogoProgramas() {
+        driver.findElement(crearCatalogoProgramasButton).click();
+    }
+
+    public void clickVerPostulaciones() {
+        driver.findElement(verPostulacionesButton).click();
+    }
+
+    public void clickAdministrarPostulaciones() {
+        driver.findElement(administrarPostulacionesButton).click();
+    }
+
+    public void clickPlanes() {
+        driver.findElement(planesButton).click();
+    }
+
+    public void clickAcciones() {
+        driver.findElement(accionesButton).click();
+    }
+
+    public void clickVerUnidadesAtencion() {
+        driver.findElement(verUnidadesAtencionButton).click();
+    }
+
     // ======= GETTERS (para assertions) =======
     public String getSuccessModalTitle() {
         return driver.findElement(successModalTitle).getText();
