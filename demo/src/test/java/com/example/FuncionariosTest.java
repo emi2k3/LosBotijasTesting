@@ -11,11 +11,13 @@ public class FuncionariosTest {
     private WebDriver driver;
     private LoginPage loginPage;
     private FuncionariosPage funcionariosPage;
+    private HomePage homePage;
     private ListadoContactosPage listadocontactosPage;
+    private LoginVerificarPage loginVerificarPage;
 
     @BeforeEach
     void setUp() {
-        //System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
+        System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
         //System.setProperty("webdriver.edge.driver", "C:\\Users\\jleod\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe");//Nico D
         driver = new EdgeDriver();
         driver.manage().window().maximize();
@@ -24,11 +26,13 @@ public class FuncionariosTest {
         funcionariosPage = new FuncionariosPage(driver);
         listadocontactosPage = new ListadoContactosPage(driver);
         HomePage homePage = new HomePage(driver);
+        LoginVerificarPage loginVerificarPage = new LoginVerificarPage(driver);
 
         loginPage.open();
         loginPage.login("12345678", "password");
         loginPage.clickLoginButton();
-        homePage.clickGestionarFuncionarios();
+        loginVerificarPage.byPassCode();
+        homePage.clickVerGestionarUsuario();
     }
 
     @Test
