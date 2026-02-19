@@ -40,8 +40,9 @@ public class EditarProgramaPage {
     private By fechaInicioInput = By.xpath("//input[@id='fecha_inicio_postulacion']");
     private By fechaFinInput = By.xpath("//input[@id='fecha_cierre_postulacion']");
 
-    //Boton submit
+    //Boton submit y error de formulario
     private By submitButton = By.xpath("//button[normalize-space()='Actualizar']");
+    private By formErrrorMessage = By.xpath("//div[@class='alert alert-danger py-2']");
 
     // ======= CONSTRUCTOR =======
     public EditarProgramaPage(WebDriver driver) {
@@ -81,6 +82,17 @@ public class EditarProgramaPage {
 
     public void clickSubmit() {
         driver.findElement(submitButton).click();
+    }
+
+
+    // ======= Greeters para asserts =======
+    public boolean isGeneralFormErrorMessageDisplayed() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(formErrrorMessage)).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     // ======= Helper Methods =======

@@ -84,6 +84,22 @@ public class ProgramaTest {
         editarProgramaPage.clickSubmit();
     }
 
+    //El test no pasa porque el el sistema permite ingresar fechas invalidas pero si lo corrigen debería pasar.
+    @Test
+    void EditarProgramaInvalido() {
+        loginPage.open();
+        loginPage.login("12345678", "password");
+        loginVerificarPage.byPassCode();
+        homePage.clickVerCatalogoProgramas();
+        listadoProgramasPage.clickVerDetallePrimerPrograma();
+        detalleProgramaPage.clickEditarPrograma();
+        editarProgramaPage.completarFormularioGeneral("Programa de pruebas editado", "Cerrado", "Programa para pruebas editado.");
+        editarProgramaPage.completarFormularioContenido("El programa ofrece financiamiento inicial y acompañamiento a emprendedores con proyectos innovadores.", "Fomentar el desarrollo de emprendimientos sostenibles.", "Editado", "Ser Editado", "Texto", "Etiqueta editada");
+        editarProgramaPage.completarFormularioFechas("01/05/2999", "02/05/3000");
+        editarProgramaPage.clickSubmit();
+        assertTrue(editarProgramaPage.isGeneralFormErrorMessageDisplayed(), "Se debería ver el mensaje de error.");
+    }
+
     @AfterEach
     void tearDown() {
         //driver.quit();
