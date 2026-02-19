@@ -33,8 +33,10 @@ public class HomePage {
     private By verAgendaReunionesButton = By.xpath("//a[@class='btn btn-success btn-sm px-3'][contains(text(),'Ver')]");
 
     //Segimiento Evaluaciones
-    private By seguimientoEvaluacionesButton = By.xpath("//a[@class='btn btn-warning btn-sm text-white px-3'][contains(text(),'Evaluaciones')]");
-    private By resultadoEvaluacionesButton = By.xpath("//a[@class='btn btn-outline-warning btn-sm px-3 text-dark border-warning'][contains(text(),'Resultados')]");
+    private By responderIsLoad = By.xpath("//*[@id='app']'/main/div/div/div/form/div[2]/div[1]/h3'");
+    private By responderEvaluaciones = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/contacto/respuestas/create']");
+    private By verEvaluacionesButton = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/evaluaciones']");
+    private By resultadoEvaluacionesButton = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/contacto/mis-resultados']");
 
     //Catalogo Programas
     private By vercatalogoProgramasButton = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/programas'][normalize-space()='Ver']");
@@ -100,7 +102,7 @@ public class HomePage {
     }
 
     public void clickSeguimientoEvaluaciones() {
-        driver.findElement(seguimientoEvaluacionesButton).click();
+        driver.findElement(verEvaluacionesButton).click();
     }
 
     public void clickResultadoEvaluaciones() {
@@ -133,6 +135,10 @@ public class HomePage {
 
     public void clickVerUnidadesAtencion() {
         driver.findElement(verUnidadesAtencionButton).click();
+    }
+
+    public void clickResponderEvaluaciones() {
+        driver.findElement(responderEvaluaciones).click();
     }
 
     // ======= GETTERS (para assertions) =======
