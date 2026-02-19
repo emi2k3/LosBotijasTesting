@@ -23,7 +23,7 @@ public class HomePage {
     private By homePageLoad = By.xpath("//h1[@class='h3 fw-bold mb-1' and text()='Hola, Carlos Rodríguez']");
 
     //Gestionar funcionarios
-    private By verGestionarUsuarioButton = By.cssSelector(".btn.btn-secondary.btn-sm.px-3");
+    private By verFuncionariosButton = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/funcionarios'][contains(text(),'Ver')]");
     private By crearFuncionarioButton = By.cssSelector(".btn.btn-outline-secondary.btn-sm.px-3");
 
     //Gestionar contactos
@@ -82,8 +82,8 @@ public class HomePage {
         return driver.findElement(welcomeText).isDisplayed();
     }
 
-    public void clickVerGestionarUsuario() {
-        driver.findElement(verGestionarUsuarioButton).click();
+    public void clickVerFuncionarios() {
+        driver.findElement(verFuncionariosButton).click();
     }
 
     public boolean isHomePageLoaded() {
@@ -95,7 +95,7 @@ public class HomePage {
         driver.findElement(crearFuncionarioButton).click();
     }
 
-     public void clickVerAgendaReuniones() {
+    public void clickVerAgendaReuniones() {
         driver.findElement(verAgendaReunionesButton).click();
     }
 
