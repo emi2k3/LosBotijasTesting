@@ -13,6 +13,7 @@ public class ProgramaTest {
     private LoginPage loginPage;
     private LoginVerificarPage loginVerificarPage;
     private HomePage homePage;
+    private EditarProgramaPage editarProgramaPage;
     private CrearProgramaPage crearProgramaPage;
 
     @BeforeEach
@@ -26,6 +27,7 @@ public class ProgramaTest {
         homePage = new HomePage(driver);
         loginVerificarPage = new LoginVerificarPage(driver);
         crearProgramaPage = new CrearProgramaPage(driver);
+        editarProgramaPage = new EditarProgramaPage(driver);
     }
 
     @Test
@@ -64,6 +66,18 @@ public class ProgramaTest {
         assertTrue(crearProgramaPage.isEndDateErrorMessageDisplayed(), "Se esperaba un mensaje de error para la fecha de cierre inválida, pero no se mostró.");
     }
     
+    @Test
+    void EditarProgramaValido() {
+        loginPage.open();
+        loginPage.login("12345678", "password");
+        loginVerificarPage.byPassCode();
+        homePage.clickVerCatalogoProgramas();
+        editarProgramaPage.completarFormularioGeneral("Programa de pruebas editado", "Cerrado", "Descripción corta editada.");
+        editarProgramaPage.completarFormularioContenido("Descripción larga editada.", "Objetivos editados.", "Documentación requerida editada.", "Requisito de prueba editado", "Texto", "Etiqueta de requisito editada");
+        editarProgramaPage.completarFormularioFechas("01/05/2026", "02/05/2026");
+        editarProgramaPage.clickSubmit();
+    }
+
     @AfterEach
     void tearDown() {
         //driver.quit();
