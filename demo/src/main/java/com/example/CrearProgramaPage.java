@@ -40,6 +40,8 @@ public class CrearProgramaPage {
     private By submitButton = By.xpath("//button[normalize-space()='Guardar']");
 
     private By formErrorMessage = By.xpath("//div[@class='alert alert-danger py-2']");
+    private By formStartDateErrorMessage = By.xpath("//div[@class='invalid-feedback' and contains(text(), 'La fecha de inicio no puede superar los 5 años desde hoy')]");
+    private By formEndDateErrorMessage = By.xpath("//div[@class='invalid-feedback' and contains(text(), 'La fecha de cierre no puede superar los 5 años desde hoy')]");
 
     // ======= CONSTRUCTOR =======
     public CrearProgramaPage(WebDriver driver) {
@@ -103,6 +105,26 @@ public class CrearProgramaPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(formErrorMessage));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isStartDateErrorMessageDisplayed() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(formStartDateErrorMessage));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isEndDateErrorMessageDisplayed() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(formEndDateErrorMessage));
             return true;
         } catch (Exception e) {
             return false;

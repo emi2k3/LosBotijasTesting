@@ -50,6 +50,19 @@ public class ProgramaTest {
         crearProgramaPage.clickSubmit();
         assertTrue(crearProgramaPage.isFormErrorMessageDisplayed(), "Se esperaba un mensaje de error por datos inválidos, pero no se mostró.");
     }
+
+    @Test
+    void CrearProgramaFechasInvalidas() {
+        loginPage.open();
+        loginPage.login("12345678", "password");
+        loginVerificarPage.byPassCode();
+        homePage.clickCrearCatalogoProgramas();
+        crearProgramaPage.completarFormulario("Programa de pruebas", "Abierto", "Programa para pruebas.", "Programa para pruebas muy probadas.", 
+        "Probar", "Ser probado", "Pasar pruebas", "Requisito de prueba", "Texto", "Etiqueta de requisito", "18/02/9999", "18/04/9999");
+        crearProgramaPage.clickSubmit();
+        assertTrue(crearProgramaPage.isStartDateErrorMessageDisplayed(), "Se esperaba un mensaje de error para la fecha de inicio inválida, pero no se mostró.");
+        assertTrue(crearProgramaPage.isEndDateErrorMessageDisplayed(), "Se esperaba un mensaje de error para la fecha de cierre inválida, pero no se mostró.");
+    }
     
     @AfterEach
     void tearDown() {
