@@ -38,8 +38,9 @@ public class HomePage {
 
     //Catalogo Programas
     private By vercatalogoProgramasButton = By.xpath("//a[@class='btn btn-info btn-sm text-white px-3'][contains(text(),'Ver')]");
-    private By crearCatalogoProgramasButton = By.xpath("//a[@class='btn btn-outline-info btn-sm px-3 text-dark border-info'][contains(text(),'Crear')]");
+    private By crearCatalogoProgramasButton = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/programas/create']");
 
+    
     //Gestion Postulaciones
     private By verPostulacionesButton = By.xpath("//a[@class='btn btn-danger btn-sm px-3'][contains(text(),'Ver postulaciones')]");
     private By administrarPostulacionesButton = By.xpath("//a[@class='btn btn-outline-danger btn-sm px-3'][contains(text(),'Administrar')]");
