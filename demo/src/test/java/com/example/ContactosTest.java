@@ -40,7 +40,7 @@ public class ContactosTest {
         loginPage.open();
         loginPage.login("12345678", "password");
         assertTrue(homePage.isWelcomeTextDisplayed(), "El texto de bienvenida se muestra, el login fue exitoso.");
-        homePage.clickGestionarContactos();
+        homePage.clickVerContactos();
         //TEST CRASHEA POR LAS COOKIES, PENDIENTE DE SOLUCIONAR.
     }
 

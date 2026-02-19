@@ -28,15 +28,25 @@ public class FuncionariosPage {
         driver.findElement(createButton).click();
     }
 
+
     public void fillForm(String name, String lastName, String cedula, String phone, String email, String password) {
 
+        driver.findElement(nameInput).clear();
         driver.findElement(nameInput).sendKeys(name);
+        driver.findElement(lastNameInput).clear();
         driver.findElement(lastNameInput).sendKeys(lastName);
+        driver.findElement(cedulaInput).clear();
         driver.findElement(cedulaInput).sendKeys(cedula);
+        driver.findElement(phoneInput).clear();
         driver.findElement(phoneInput).sendKeys(phone);
+        driver.findElement(emailInput).clear();
         driver.findElement(emailInput).sendKeys(email);
+    }
+
+    public void fillPassword(String password) {
         driver.findElement(passwordInput).sendKeys(password);
     }
+     
 
     public void selectRole(String role) {
         driver.findElement(roleSelect).sendKeys(role);

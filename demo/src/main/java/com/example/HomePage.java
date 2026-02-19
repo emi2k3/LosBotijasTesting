@@ -23,11 +23,11 @@ public class HomePage {
     private By homePageLoad = By.xpath("//h1[@class='h3 fw-bold mb-1' and text()='Hola, Carlos Rodríguez']");
 
     //Gestionar funcionarios
-    private By verFuncionariosButton = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/funcionarios'][contains(text(),'Ver')]");
+    private By verFuncionariosButton = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/funcionarios']");
     private By crearFuncionarioButton = By.cssSelector(".btn.btn-outline-secondary.btn-sm.px-3");
 
     //Gestionar contactos
-    private By gestionarContactosButton = By.xpath("//a[@class='btn btn-primary btn-sm px-3'][contains(text(),'Ver')]");
+    private By verContactosButton = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/contactos'][contains(text(),'Ver contactos')]");
 
     //Agenda Reuniones
     private By verAgendaReunionesButton = By.xpath("//a[@class='btn btn-success btn-sm px-3'][contains(text(),'Ver')]");
@@ -72,9 +72,9 @@ public class HomePage {
         wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
     }
     
-    public void clickGestionarContactos() {
+    public void clickVerContactos() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(gestionarContactosButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(verContactosButton)).click();
     }
     
     public boolean isWelcomeTextDisplayed() {
