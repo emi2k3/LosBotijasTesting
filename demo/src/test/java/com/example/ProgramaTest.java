@@ -45,8 +45,8 @@ public class ProgramaTest {
         loginPage.login("12345678", "password");
         loginVerificarPage.byPassCode();
         homePage.clickCrearCatalogoProgramas();
-        crearProgramaPage.completarFormulario("", "Abierto", "", "", 
-        "", "", "", "wasd", "Texto", "wasd", "01/04/2026", "02/04/2026");
+        crearProgramaPage.completarFormulario("wasd", "Abierto", " ", " ", 
+        " ", " ", "", "wasd", "Texto", "wasd", "01/04/2026", "02/04/2026");
         crearProgramaPage.clickSubmit();
         assertTrue(crearProgramaPage.isFormErrorMessageDisplayed(), "Se esperaba un mensaje de error por datos inválidos, pero no se mostró.");
     }
