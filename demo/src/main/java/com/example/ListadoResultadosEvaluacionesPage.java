@@ -3,26 +3,29 @@ package com.example;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PlanesAccionPage {
+public class ListadoResultadosEvaluacionesPage {
 
     private WebDriver driver;
 
     // URL
-    private String url = "https://saltoinnova.brazilsouth.cloudapp.azure.com/";
+    private String url = "https://saltoinnova.brazilsouth.cloudapp.azure.com/funcionario/resultados";
 
     // ======= LOCALIZADORES Y ELEMENTOS =======
-    private By editarPlan = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/planes-accion/30/edit']");
-    
+    private By resultadosGeneralesText = By.xpath("//h2[@class='fw-normal mb-0']");
+
+
+
+
     // ======= CONSTRUCTOR =======
-    public PlanesAccionPage(WebDriver driver) {
+    public ListadoResultadosEvaluacionesPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -30,12 +33,12 @@ public class PlanesAccionPage {
     public void openPage() {
         driver.get(url);
     }
+    
 
-    // ======= Metodos para assertions =======
-   public void clickEditarPlan () {
+    // ======= GETTERS (para assertions) =======
+    public boolean isResultadosGeneralesTextDisplayed() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(editarPlan)).click();
-   }
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(resultadosGeneralesText)).isDisplayed();
+    }
 }
-
 

@@ -20,7 +20,8 @@ public class HomePage {
 
     private By welcomeText = By.xpath("//h1[@class='h3 fw-bold mb-1']");
 
-    private By homePageLoad = By.xpath("//h1[@class='h3 fw-bold mb-1' and text()='Hola, Carlos Rodríguez']");
+    private By homePageLoad = By.xpath("//p[normalize-space()='Panel de Funcionario']");
+
 
     //Gestionar funcionarios
     private By verFuncionariosButton = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/funcionarios']");
@@ -57,6 +58,10 @@ public class HomePage {
     //Para hacer logout
     private By userMenuButton = By.xpath("//span[@class='text-white fw-semibold']");
     private By logoutButton = By.xpath("//button[normalize-space()='Cerrar sesión']");
+
+    //Roles asesor
+    private By resultadoEvaluacionesAsAsesorButton = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/funcionario/resultados']");
+    private By verEvaluacionesAsAsesorButton = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/evaluaciones']");
 
 
     // ======= CONSTRUCTOR =======
@@ -139,6 +144,15 @@ public class HomePage {
 
     public void clickResponderEvaluaciones() {
         driver.findElement(responderEvaluaciones).click();
+    }
+
+    //Metodos para rol asesor
+    public void clickResultadoEvaluacionesAsAsesor() {
+        driver.findElement(resultadoEvaluacionesAsAsesorButton).click();
+    }
+
+    public void clickVerEvaluacionesAsAsesor() {
+        driver.findElement(verEvaluacionesAsAsesorButton).click();
     }
 
     // ======= GETTERS (para assertions) =======

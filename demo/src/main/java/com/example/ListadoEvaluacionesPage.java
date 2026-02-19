@@ -25,6 +25,8 @@ public class ListadoEvaluacionesPage {
     private By volverButton = By.xpath("//a[@class='btn btn-outline-secondary rounded-pill']");
     private By responderEvaluacionButton = By.xpath("//button[normalize-space()='Responder evaluación']");
 
+    //De la lista de evaluaciones
+    
 
     // ======= CONSTRUCTOR =======
     public ListadoEvaluacionesPage(WebDriver driver) {
@@ -54,6 +56,11 @@ public class ListadoEvaluacionesPage {
     // ======= GETTERS (para assertions) =======
     public String getListaDeEvaluacionesText() {
         return driver.findElement(listaDeEvaluacionesText).getText();
+    }
+
+    public boolean isListaDeEvaluacionesTextDisplayed() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(listaDeEvaluacionesText)).isDisplayed();
     }
 }
 
