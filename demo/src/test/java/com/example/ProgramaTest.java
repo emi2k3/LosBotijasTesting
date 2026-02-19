@@ -86,7 +86,7 @@ public class ProgramaTest {
 
     //El test no pasa porque el el sistema permite ingresar fechas invalidas pero si lo corrigen debería pasar.
     @Test
-    void EditarProgramaInvalido() {
+    void EditarProgramaFechasInvalidas() {
         loginPage.open();
         loginPage.login("12345678", "password");
         loginVerificarPage.byPassCode();
@@ -98,6 +98,18 @@ public class ProgramaTest {
         editarProgramaPage.completarFormularioFechas("01/05/2999", "02/05/3000");
         editarProgramaPage.clickSubmit();
         assertTrue(editarProgramaPage.isGeneralFormErrorMessageDisplayed(), "Se debería ver el mensaje de error.");
+    }
+
+    @Test
+    void EliminarPrograma() {
+        loginPage.open();
+        loginPage.login("12345678", "password");
+        loginVerificarPage.byPassCode();
+        homePage.clickVerCatalogoProgramas();
+        listadoProgramasPage.clickVerDetallePrimerPrograma();
+        detalleProgramaPage.clickEliminarPrograma();
+        detalleProgramaPage.clickConfirmEliminar();
+        assertTrue(listadoProgramasPage.isEliminarProgramaSuccessMessageDisplayed(), "Se ve el mensaje de programa eliminado correctmaente.");
     }
 
     @AfterEach
