@@ -17,7 +17,7 @@ public class FuncionariosPage {
     private By emailInput = By.id("email");
     private By passwordInput = By.id("password");
     private By roleSelect = By.id("rol");
-    private By submitButton = By.xpath("//button[@type='submit']");
+    private By submitButton = By.xpath("//*[@id='app']/main/div/div/div/div[2]/form/div[6]/button");
     private By alertMessage = By.xpath("//div[@role='alert']");
 
     public FuncionariosPage(WebDriver driver) {
@@ -28,8 +28,7 @@ public class FuncionariosPage {
         driver.findElement(createButton).click();
     }
 
-    public void fillForm(String name, String lastName, String cedula,
-                         String phone, String email, String password, String role) {
+    public void fillForm(String name, String lastName, String cedula, String phone, String email, String password) {
 
         driver.findElement(nameInput).sendKeys(name);
         driver.findElement(lastNameInput).sendKeys(lastName);
@@ -37,10 +36,10 @@ public class FuncionariosPage {
         driver.findElement(phoneInput).sendKeys(phone);
         driver.findElement(emailInput).sendKeys(email);
         driver.findElement(passwordInput).sendKeys(password);
+    }
 
-        WebElement select = driver.findElement(roleSelect);
-        select.click();
-        select.findElement(By.xpath(".//option[.='" + role + "']")).click();
+    public void selectRole(String role) {
+        driver.findElement(roleSelect).sendKeys(role);
     }
 
     public void submit() {
