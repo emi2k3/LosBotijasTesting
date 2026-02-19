@@ -13,10 +13,11 @@ public class ProgramaTest {
     private LoginPage loginPage;
     private LoginVerificarPage loginVerificarPage;
     private HomePage homePage;
+    private CrearProgramaPage crearProgramaPage;
 
     @BeforeEach
     void setUp() {
-        //System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
+        System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
         //System.setProperty("webdriver.edge.driver", "C:\\Users\\jleod\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe");//Nico D
         //System.setProperty("C:\\Users\\Usuario\\OneDrive\\Escritorio\\InnovaAutomation\\edgedriver_win64\\msedgedriver.exe"); //LucasChiappini
         driver = new EdgeDriver();
@@ -24,6 +25,7 @@ public class ProgramaTest {
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         loginVerificarPage = new LoginVerificarPage(driver);
+        crearProgramaPage = new CrearProgramaPage(driver);
     }
 
     @Test
@@ -32,8 +34,34 @@ public class ProgramaTest {
         loginPage.login("12345678", "password");
         loginVerificarPage.byPassCode();
         homePage.clickCrearCatalogoProgramas();
-        
+        crearProgramaPage.completarFormulario("Programa de pruebas", "Abierto", "Programa para pruebas.", "Programa para pruebas muy probadas.", 
+        "Probar", "Ser probado", "Pasar pruebas", "Requisito de prueba", "Texto", "Etiqueta de requisito", "01/04/2026", "02/04/2026");
+        crearProgramaPage.clickSubmit();
+    }
 
+    @Test
+    void CrearProgramaInvalido() {
+        loginPage.open();
+        loginPage.login("12345678", "password");
+        loginVerificarPage.byPassCode();
+        homePage.clickCrearCatalogoProgramas();
+        crearProgramaPage.completarFormulario("wasd", "Abierto", " ", " ", 
+        " ", " ", "", "wasd", "Texto", "wasd", "01/04/2026", "02/04/2026");
+        crearProgramaPage.clickSubmit();
+        assertTrue(crearProgramaPage.isFormErrorMessageDisplayed(), "Se esperaba un mensaje de error por datos inválidos, pero no se mostró.");
+    }
+
+    @Test
+    void CrearProgramaFechasInvalidas() {
+        loginPage.open();
+        loginPage.login("12345678", "password");
+        loginVerificarPage.byPassCode();
+        homePage.clickCrearCatalogoProgramas();
+        crearProgramaPage.completarFormulario("Programa de pruebas", "Abierto", "Programa para pruebas.", "Programa para pruebas muy probadas.", 
+        "Probar", "Ser probado", "Pasar pruebas", "Requisito de prueba", "Texto", "Etiqueta de requisito", "18/02/9999", "18/04/9999");
+        crearProgramaPage.clickSubmit();
+        assertTrue(crearProgramaPage.isStartDateErrorMessageDisplayed(), "Se esperaba un mensaje de error para la fecha de inicio inválida, pero no se mostró.");
+        assertTrue(crearProgramaPage.isEndDateErrorMessageDisplayed(), "Se esperaba un mensaje de error para la fecha de cierre inválida, pero no se mostró.");
     }
     
     @AfterEach
