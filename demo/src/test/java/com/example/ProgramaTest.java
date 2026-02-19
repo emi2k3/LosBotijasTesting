@@ -15,6 +15,8 @@ public class ProgramaTest {
     private HomePage homePage;
     private EditarProgramaPage editarProgramaPage;
     private CrearProgramaPage crearProgramaPage;
+    private ListadoProgramasPage listadoProgramasPage;
+    private DetalleProgramaPage detalleProgramaPage;
 
     @BeforeEach
     void setUp() {
@@ -28,6 +30,8 @@ public class ProgramaTest {
         loginVerificarPage = new LoginVerificarPage(driver);
         crearProgramaPage = new CrearProgramaPage(driver);
         editarProgramaPage = new EditarProgramaPage(driver);
+        listadoProgramasPage = new ListadoProgramasPage(driver);
+        detalleProgramaPage = new DetalleProgramaPage(driver);
     }
 
     @Test
@@ -72,8 +76,10 @@ public class ProgramaTest {
         loginPage.login("12345678", "password");
         loginVerificarPage.byPassCode();
         homePage.clickVerCatalogoProgramas();
-        editarProgramaPage.completarFormularioGeneral("Programa de pruebas editado", "Cerrado", "Descripción corta editada.");
-        editarProgramaPage.completarFormularioContenido("Descripción larga editada.", "Objetivos editados.", "Documentación requerida editada.", "Requisito de prueba editado", "Texto", "Etiqueta de requisito editada");
+        listadoProgramasPage.clickVerDetallePrimerPrograma();
+        detalleProgramaPage.clickEditarPrograma();
+        editarProgramaPage.completarFormularioGeneral("Programa de pruebas editado", "Cerrado", "Programa para pruebas editado.");
+        editarProgramaPage.completarFormularioContenido("Esto fue editado", "Objetivo editado", "Documentacion Editada", "Editado", "Texto", "Etiqueta editada");
         editarProgramaPage.completarFormularioFechas("01/05/2026", "02/05/2026");
         editarProgramaPage.clickSubmit();
     }
