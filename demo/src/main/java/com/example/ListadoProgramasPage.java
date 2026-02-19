@@ -28,6 +28,8 @@ public class ListadoProgramasPage {
     // Lista de programas
     private By verDetallePrograma1Button = By.xpath("//div[@class='container-fluid py-4']//div[1]//div[1]//div[1]//div[2]//a[1]"); 
 
+    //Mensaje de confirmación al eliminar un programa
+    private By eliminarProgramaSuccessMessage = By.xpath("//div[contains(., 'Programa eliminado correctamente')]");
 
     // ======= CONSTRUCTOR =======
     public ListadoProgramasPage(WebDriver driver) {
@@ -59,6 +61,14 @@ public class ListadoProgramasPage {
     public boolean isListaDeProgramasTextDisplayed() {
         try {
             return driver.findElement(listaDeProgramasText).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isEliminarProgramaSuccessMessageDisplayed() {
+        try {
+            return driver.findElement(eliminarProgramaSuccessMessage).isDisplayed();
         } catch (Exception e) {
             return false;
         }

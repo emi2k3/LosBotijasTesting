@@ -23,7 +23,9 @@ public class DetalleProgramaPage {
     private By volverButton = By.xpath("//a[@class='btn btn-outline-secondary btn-sm rounded-pill']");
 
     //Confirmación de eliminar programa
-    private By confirmEliminarButton = By.xpath("//a[@class='btn btn-outline-secondary btn-sm rounded-pill']");
+    private By confirmEliminarButton = By.cssSelector(".btn.btn-danger");
+
+
 
 
     // ======= CONSTRUCTOR =======
@@ -52,9 +54,12 @@ public class DetalleProgramaPage {
     }
 
     public void clickConfirmEliminar() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(confirmEliminarButton)).click();
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+    wait.until(ExpectedConditions.elementToBeClickable(confirmEliminarButton)).click();
     }
+
+
 
     
      // ======= Helper Methods =======
