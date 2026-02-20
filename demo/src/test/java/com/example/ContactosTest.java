@@ -1,13 +1,11 @@
 package com.example;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.Duration;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.edge.*;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ContactosTest {
 
@@ -15,33 +13,78 @@ public class ContactosTest {
     private LoginPage loginPage;
     private CrearContactoPage nuevoContactoPage;
     private HomePage homePage;
-    private ListadoContactosPage listadoContactosPage;
+    private CrearPostulacionPage crearPostulacionPage;
+
+    private LoginVerificarPage loginVerificarPage;
 
     @BeforeEach
     void setUp() {
-        System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
-        //System.setProperty("webdriver.edge.driver", "C:\\Users\\jleod\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe");//Nico D
+        // System.setProperty("webdriver.edge.driver",
+        // "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
+        // System.setProperty("webdriver.edge.driver",
+        // "C:\\Users\\jleod\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe");//Nico
+        // D
+        System.setProperty("webdriver.edge.driver",
+                "C:\\Users\\Usuario\\OneDrive\\Escritorio\\InnovaAutomation\\edgedriver_win64\\msedgedriver.exe");
         driver = new EdgeDriver();
         driver.manage().window().maximize();
 
         loginPage = new LoginPage(driver);
         nuevoContactoPage = new CrearContactoPage(driver);
         homePage = new HomePage(driver);
-        listadoContactosPage = new ListadoContactosPage(driver);
-
-        loginPage.open();
-        loginPage.login("12345678", "password");
+        loginVerificarPage = new LoginVerificarPage(driver);
+        crearPostulacionPage=new CrearPostulacionPage(driver);
     }
 
+    @Test
+    void desactivarContacto() {
+        loginPage.open();
+        loginPage.login("12345666", "!Lucaswachin7"); // Usuario contacto
+        loginVerificarPage.byPassCode();
+        homePage.clickPerfilContacto();
+        homePage.clickEditarUsuario();
+        // homePage.clickDesactivarCuenta(); ver despues
+    }
 
     @Test
-    void desactivarContactoComoFuncionario() {
-        // Este test asume que hay al menos un contacto registrado"
+    void verProgramas() {
         loginPage.open();
-        loginPage.login("12345678", "password");
-        assertTrue(homePage.isWelcomeTextDisplayed(), "El texto de bienvenida se muestra, el login fue exitoso.");
-        homePage.clickGestionarContactos();
-        //TEST CRASHEA POR LAS COOKIES, PENDIENTE DE SOLUCIONAR.
+        loginPage.login("12345666", "!Lucaswachin7"); // Usuario contacto
+        loginVerificarPage.byPassCode();
+        homePage.clickNuevaPostulacion();
+        assertEquals(
+                "Postulaciones a programas",
+                homePage.obtenerTituloPostulaciones());
+    }
+
+    @Test
+    void postularProgramasValido() {
+        loginPage.open();
+        loginPage.login("12345666", "!Lucaswachin7"); // Usuario contacto
+        loginVerificarPage.byPassCode();
+        homePage.clickNuevaPostulacion();
+        homePage.clickEnPostulacion();
+        homePage.clickPostularme();
+        crearPostulacionPage.completarPostulacion(
+        "Lucas Contact",
+        "C:\\Users\\Usuario\\OneDrive\\Escritorio\\Lucas Contact.docx"
+ );}
+
+ @Test
+    void postularProgramasInvalido() {
+        loginPage.open();
+        loginPage.login("12345666", "!Lucaswachin7"); // Usuario contacto
+        loginVerificarPage.byPassCode();
+        homePage.clickNuevaPostulacion();
+        homePage.clickEnPostulacion();
+        homePage.clickPostularme();
+        crearPostulacionPage.completarPostulacion(
+        "",
+        ""
+);
+
+assertTrue(crearPostulacionPage.camposSiguenVacios());
+
     }
 
     @Test
@@ -54,15 +97,24 @@ public class ContactosTest {
                 "erich95@example.com",
                 "5555555",
                 "password123",
-                "Encargado"
-        );
+                "Encargado");
 
         nuevoContactoPage.submit();
         nuevoContactoPage.getError();
     }
 
+    @Test
+    void desactivarContactoComoFuncionario() {
+        // Este test asume que hay al menos un contacto registrado"
+        loginPage.open();
+        loginPage.login("12345678", "password");
+        assertTrue(homePage.isWelcomeTextDisplayed(), "El texto de bienvenida se muestra, el login fue exitoso.");
+
+        // TEST CRASHEA POR LAS COOKIES, PENDIENTE DE SOLUCIONAR.
+    }
+
     @AfterEach
     void tearDown() {
-        driver.quit();
+        // driver.quit();
     }
 }

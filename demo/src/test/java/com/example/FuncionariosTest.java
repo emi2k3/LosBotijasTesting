@@ -12,27 +12,34 @@ public class FuncionariosTest {
     private LoginPage loginPage;
     private FuncionariosPage funcionariosPage;
     private ListadoContactosPage listadocontactosPage;
+    private LoginVerificarPage loginVerificarPage;
+    private SelectProfilePage selectProfilePage;
 
     @BeforeEach
     void setUp() {
         //System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
         //System.setProperty("webdriver.edge.driver", "C:\\Users\\jleod\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe");//Nico D
+         System.setProperty("webdriver.edge.driver","C:\\Users\\Usuario\\OneDrive\\Escritorio\\InnovaAutomation\\edgedriver_win64\\msedgedriver.exe"); 
         driver = new EdgeDriver();
         driver.manage().window().maximize();
 
         loginPage = new LoginPage(driver);
         funcionariosPage = new FuncionariosPage(driver);
         listadocontactosPage = new ListadoContactosPage(driver);
-        HomePage homePage = new HomePage(driver);
-
+        loginVerificarPage= new LoginVerificarPage(driver);
+        selectProfilePage=new SelectProfilePage(driver);
+        
         loginPage.open();
-        loginPage.login("12345678", "password");
-        loginPage.clickLoginButton();
-        homePage.clickGestionarFuncionarios();
+        loginPage.enterCedula("55555555"); // es una cuenta dual.
+                loginPage.enterPassword("password");
+                loginPage.clickLoginButton();
+                loginVerificarPage.byPassCode();
+             selectProfilePage.selectProfile("funcionario");
+       
     }
 
     @Test
-    void crearFuncionarioConCredencialesRepetidas() {
+    void crearFuncionarioConCredencialesRepetidas() {// aca poner datos que ya existen en el sistema.
         funcionariosPage.clickCreate();
         funcionariosPage.fillForm(
                 "Test", "Test",
@@ -40,6 +47,21 @@ public class FuncionariosTest {
                 "12345678",
                 "carlos.rodriguez@saltoinnova.gub.uy",
                 "password",
+                "Consulta"
+        );
+        funcionariosPage.submit();
+        assertTrue(funcionariosPage.isAlertVisible());
+    }
+
+     @Test
+    void crearFuncionarioTodoValido() {// aca poner datos que no esten repetidos y usen el estandar correcto.
+        funcionariosPage.clickCreate();
+        funcionariosPage.fillForm(
+                "Funcionario", "Test",
+                "455566734",
+                "098187219",
+                "testfuncionario@gmail.com",
+                "!Lucaswachin7",
                 "Consulta"
         );
         funcionariosPage.submit();
@@ -71,6 +93,16 @@ public class FuncionariosTest {
         assertTrue(funcionariosPage.isAlertVisible());
     
     }
+
+     @Test
+void cerrarPrograma() {
+    funcionariosPage.verProgramaClick();
+    funcionariosPage.clickProgramaCard();
+    funcionariosPage.clickEditarPrograma();
+    funcionariosPage.seleccionarEstadoCerrado();
+    funcionariosPage.clickActualizar();
+    assertTrue(driver.getPageSource().contains("Cerrado"));
+}
 
     @Test
     public void Caso3() {

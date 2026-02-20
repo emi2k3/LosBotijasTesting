@@ -3,7 +3,9 @@ package com.example;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -24,10 +26,21 @@ public class HomePage {
 
     //Gestionar funcionarios
     private By verGestionarUsuarioButton = By.cssSelector(".btn.btn-secondary.btn-sm.px-3");
+    private By gestionarEditarUsuarioButton= By.xpath("//a[contains(@href,'/edit')]");
+
     private By crearFuncionarioButton = By.cssSelector(".btn.btn-outline-secondary.btn-sm.px-3");
 
     //Gestionar contactos
-    private By gestionarContactosButton = By.xpath("//a[@class='btn btn-primary btn-sm px-3'][contains(text(),'Ver')]");
+private By perfilContacto =
+        By.xpath("//a[contains(@class,'dropdown-toggle')]");
+        private By nuevaPostulacionButton =
+        By.xpath("//a[normalize-space()='Nueva postulación']");
+        private By enPostulacion=By.xpath("//*[@id=\"app\"]/main/div/div[2]/div[1]");
+        private By tituloPostulaciones = By.xpath("//h1[contains(text(),'Postulaciones a programas')]");
+private By postularmeButton =
+        By.xpath("//a[contains(@class,'btn-primary') and normalize-space()='Postularme']");
+        
+
 
     //Agenda Reuniones
     private By verAgendaReunionesButton = By.xpath("//a[@class='btn btn-success btn-sm px-3'][contains(text(),'Ver')]");
@@ -42,15 +55,25 @@ public class HomePage {
 
     //Gestion Postulaciones
     private By verPostulacionesButton = By.xpath("//a[@class='btn btn-danger btn-sm px-3'][contains(text(),'Ver postulaciones')]");
-    private By administrarPostulacionesButton = By.xpath("//a[@class='btn btn-outline-danger btn-sm px-3'][contains(text(),'Administrar')]");
+    private By administrarPostulacionesButton =
+        By.xpath("//a[normalize-space()='Administrar']");
+private By desactivarCuentaButton =
+        By.cssSelector("button[data-bs-target='#deleteModalAccountModal']");
+
+private By confirmarDesactivarBtn =
+    By.cssSelector("#deleteModalAccountModal .btn-danger");
+
+
+
 
     //Seguimiento Planes de accion
     private By planesButton = By.xpath("//a[@class='btn btn-primary btn-sm px-3'][contains(text(),'Planes')]");
     private By accionesButton = By.xpath("//a[@class='btn btn-outline-primary btn-sm px-3'][contains(text(),'Acciones')]");
 
     //Unidades de atencion
-    private By verUnidadesAtencionButton = By.xpath("//a[@class='btn btn-outline-primary btn-sm px-3'][contains(text(),'Ver todas')]");
-
+    private By verUnidadesAtencionButton = By.xpath("//a[@class='btn btn-outline-primary btn-sm px-3'][contains(text(),'Evaluaciones')]");
+private By evaluacionesButton =
+        By.xpath("//*[@id=\"app\"]/main/div/div/div[2]/div[2]/div/div/div[2]/a[1]");
     //Para hacer logout
     private By userMenuButton = By.xpath("//span[@class='text-white fw-semibold']");
     private By logoutButton = By.xpath("//button[normalize-space()='Cerrar sesión']");
@@ -72,10 +95,29 @@ public class HomePage {
         wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
     }
     
-    public void clickGestionarContactos() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(gestionarContactosButton)).click();
+    public void clickEvaluaciones() {
+        driver.findElement(evaluacionesButton).click();
     }
+
+  public void clickPerfilContacto() {
+        driver.findElement(perfilContacto).click();
+    }
+
+     public void clickNuevaPostulacion() {
+        driver.findElement(nuevaPostulacionButton).click();
+    }
+
+     public void clickEnPostulacion() {
+        driver.findElement(enPostulacion).click();
+    }
+
+    public void clickPostularme() {
+    driver.findElement(postularmeButton).click();
+}
+
+    public String obtenerTituloPostulaciones() {
+    return driver.findElement(tituloPostulaciones).getText();
+}
     
     public boolean isWelcomeTextDisplayed() {
         return driver.findElement(welcomeText).isDisplayed();
@@ -84,6 +126,17 @@ public class HomePage {
     public void clickVerGestionarUsuario() {
         driver.findElement(verGestionarUsuarioButton).click();
     }
+
+
+     public void clickEditarUsuario() {
+        driver.findElement(gestionarEditarUsuarioButton).click();
+    }
+
+ public void clickDesactivarCuenta() {
+driver.findElement(desactivarCuentaButton).click();
+}
+
+
 
     public boolean isHomePageLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -133,6 +186,8 @@ public class HomePage {
     public void clickVerUnidadesAtencion() {
         driver.findElement(verUnidadesAtencionButton).click();
     }
+
+    
 
     // ======= GETTERS (para assertions) =======
     public String getSuccessModalTitle() {

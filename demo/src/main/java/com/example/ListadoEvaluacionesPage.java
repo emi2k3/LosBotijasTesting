@@ -16,7 +16,7 @@ public class ListadoEvaluacionesPage {
     private WebDriver driver;
 
     // URL
-    private String url = "https://saltoinnova.brazilsouth.cloudapp.azure.com/evaluaciones";
+    private String url = "https://saltoinnova.brazilsouth.cloudapp.azure.com/evaluaciones"; // preguntar si usar la misma page nomas (para hacer lo mio.)
 
     // ======= LOCALIZADORES Y ELEMENTOS =======
     private By listaDeEvaluacionesText = By.xpath("//h2[@class='fw-normal mb-0']");
