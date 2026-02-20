@@ -17,13 +17,14 @@ public class DetalleProgramaPage {
     // ======= LOCALIZADORES Y ELEMENTOS =======
 
     //Texto y botones
-    private By detalleDeProgramaText = By.xpath("//h2[@class='fw-normal mb-0']");
-    private By eliminarProgramaButton = By.xpath("//button[@class='btn btn-outline-danger btn-sm rounded-pill']");
-    private By editarProgramaButton = By.xpath("//a[@class=' btn btn-outline-primary btn-sm rounded-pill']");
+    private By detalleDeProgramaText = By.cssSelector(".h4");
+    private By eliminarProgramaButton = By.cssSelector(".btn-outline-danger");
+    private By editarProgramaButton = By.cssSelector(".bi-pencil");
     private By volverButton = By.xpath("//a[@class='btn btn-outline-secondary btn-sm rounded-pill']");
 
     //Confirmación de eliminar programa
     private By confirmEliminarButton = By.cssSelector(".btn.btn-danger");
+    private By cancelEliminarButton = By.cssSelector(".modal-footer:nth-child(3) > .btn");
 
 
 
@@ -59,9 +60,10 @@ public class DetalleProgramaPage {
     wait.until(ExpectedConditions.elementToBeClickable(confirmEliminarButton)).click();
     }
 
-
-
-    
+    public void clickCancelarEliminar() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(cancelEliminarButton)).click();
+    }
      // ======= Helper Methods =======
 
     

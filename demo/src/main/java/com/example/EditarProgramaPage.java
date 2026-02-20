@@ -18,7 +18,7 @@ public class EditarProgramaPage {
 
     // ======= LOCALIZADORES Y ELEMENTOS =======
     
-    //Botones de navegación entre secciones del formulario POR FIN TODO TIENE IDS DIOS GRACIAS
+    //Botones de navegación entre secciones del formulario
     private By generalButton = By.xpath("//button[@id='tab-general-tab']");
     private By contenidoButton = By.xpath("//button[@id='tab-contenido-tab']");
     private By fechasButton = By.xpath("//button[@id='tab-fechas-tab']");
@@ -55,7 +55,7 @@ public class EditarProgramaPage {
     }
 
     public void completarFormularioGeneral(String nombre, String estado, String descripcionCorta) {
-        driver.findElement(generalButton).click();
+        scrollAndClick(generalButton);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         type(wait, nombreProgramaInput, nombre);
         type(wait, estadoProgramaSelector, estado);
@@ -63,7 +63,7 @@ public class EditarProgramaPage {
     }
 
     public void completarFormularioContenido(String descripcionLarga, String objetivos, String docRequerida, String reqNombre, String reqTipo, String reqEtiqueta) {
-        driver.findElement(contenidoButton).click();
+        scrollAndClick(contenidoButton);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         type(wait, descripcionLargaInput, descripcionLarga);
         type(wait, objetivosInput, objetivos);
@@ -74,16 +74,15 @@ public class EditarProgramaPage {
     }
 
     public void completarFormularioFechas(String fechaInicio, String fechaFin) {
-        driver.findElement(fechasButton).click();
+        scrollAndClick(fechasButton);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         type(wait, fechaInicioInput, fechaInicio);
         type(wait, fechaFinInput, fechaFin);
     }
 
     public void clickSubmit() {
-        driver.findElement(submitButton).click();
+        scrollAndClick(submitButton);
     }
-
 
     // ======= Greeters para asserts =======
     public boolean isGeneralFormErrorMessageDisplayed() {
@@ -96,30 +95,33 @@ public class EditarProgramaPage {
     }
 
     // ======= Helper Methods =======
+    private void scrollAndClick(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+    }
+
     private void type(WebDriverWait wait, By locator, String text) {
+        WebElement element = wait.until(
+                ExpectedConditions.refreshed(
+                        ExpectedConditions.elementToBeClickable(locator)
+                )
+        );
 
-    WebElement element = wait.until(
-            ExpectedConditions.refreshed(
-                    ExpectedConditions.elementToBeClickable(locator)
-            )
-    );
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView({block:'center'});", element);
 
-    ((JavascriptExecutor) driver)
-            .executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+        String tag = element.getTagName();
 
-    String tag = element.getTagName();
-
-    if (tag.equalsIgnoreCase("select")) {
-        new org.openqa.selenium.support.ui.Select(element)
-                .selectByVisibleText(text);
-    } else {
-        element.clear();
-        element.sendKeys(text);
+        if (tag.equalsIgnoreCase("select")) {
+            if (text != null && !text.isEmpty()) {
+                new org.openqa.selenium.support.ui.Select(element)
+                        .selectByVisibleText(text);
+            }
+        } else {
+            element.clear();
+            element.sendKeys(text);
+        }
     }
-    }
-
-
-
-    
 }
-

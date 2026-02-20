@@ -37,7 +37,7 @@ public class CrearProgramaPage {
     private By fechaProgramaInicio = By.xpath("//input[@id='fecha_inicio_postulacion']");
     private By fechaProgramaFin = By.xpath("//input[@id='fecha_cierre_postulacion']");
     
-    private By submitButton = By.xpath("//button[normalize-space()='Guardar']");
+    private By submitButton = By.cssSelector("button[type='submit'].px-4");
 
     private By formErrorMessage = By.xpath("//div[@class='alert alert-danger py-2']");
     private By formStartDateErrorMessage = By.xpath("//div[@class='invalid-feedback' and contains(text(), 'La fecha de inicio no puede superar los 5 años desde hoy')]");
