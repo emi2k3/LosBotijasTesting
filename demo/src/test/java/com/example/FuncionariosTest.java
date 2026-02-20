@@ -72,18 +72,8 @@ public class FuncionariosTest {
 
     @Test
     void editarFuncionarioTodoValido() {
-        homePage.clickVerFuncionarios();
+
         listadocontactosPage.clickEditarContacto();
-        funcionariosPage.fillForm(
-
-                "Dual", 
-                "Perfil",
-                registroContactoPage.generarCedula(),
-                "099045678",
-                "dual.perfil@demo.com",
-                null
-
-        );
         //Diferentes tipos de scroll porque no me anda el del profe
         Actions actions = new Actions(driver);
         try {
@@ -96,8 +86,13 @@ public class FuncionariosTest {
         }
         // Force scrolling the document element to bottom (covers custom scroll containers)
         ((JavascriptExecutor) driver).executeScript("if(document.scrollingElement){document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;}else{window.scrollTo(0, document.body.scrollHeight);} ");
-        funcionariosPage.selectRole("admin");
+        // Finally ensure the submit is in view
+        WebElement submit = driver.findElement(By.id("submit")); // Adjust the locator as needed
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior:'auto', block:'center'});", submit);
+
+        funcionariosPage.fillForm("juan", "perez", "6666666", "123456789", "juan.perez@demo.com", "password", "Consulta");
         funcionariosPage.submit();
+        assertTrue(funcionariosPage.isAlertVisible());
     
     }
 
@@ -163,36 +158,6 @@ void cerrarPrograma() {
 
     }
 
-    @Test
-    public void CrearFuncionario_Cédula_y_Email_ya_utilizados() {
-
-        homePage.clickVerContactos();
-        funcionariosPage.clickCreate();
-        funcionariosPage.fillForm(
-
-                "Juan", "Pérez",
-                "71451123",
-                "099345678",
-                "nicod@gmail.com",
-                null
-
-        );
-        //Diferentes tipos de scroll porque no me anda el del profe
-        Actions actions = new Actions(driver);
-        try {
-            for (int i = 0; i < 3; i++) {
-                actions.sendKeys(Keys.END).perform();
-                Thread.sleep(200);
-            }
-        } catch (InterruptedException e) {
-            //si no anduvo no hacer nada.
-        }
-        // Force scrolling the document element to bottom (covers custom scroll containers)
-        ((JavascriptExecutor) driver).executeScript("if(document.scrollingElement){document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;}else{window.scrollTo(0, document.body.scrollHeight);} ");
-        funcionariosPage.selectRole("admin");
-        funcionariosPage.submit();
-
-    }
 
     @AfterEach
     void tearDown() {

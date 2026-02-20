@@ -47,7 +47,7 @@ public class EvaluacionesTest {
     void responderEvaluación() {
 
         homePage.isHomePageLoaded();
-        homePage.clickResponderEvaluaciones();
+        homePage.clickResultadoEvaluaciones();
         
     }
 
