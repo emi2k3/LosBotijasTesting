@@ -19,6 +19,7 @@ public class CrearContactoPage {
     private By consentimientoCheckbox = By.xpath("//input[@id='consentimiento_datos']");
     private By rolSelector = By.xpath("//select[@name='rol_en_empresa']");
     private By submit = By.xpath("//button[normalize-space()='Guardar contacto']");
+    private By continuarDatoContacto=By.xpath("//*[@id=\"createContactoForm\"]/div[4]/button");
     private By error = By.className("invalid-feedback");
 
     // ======= CONSTRUCTOR =======
@@ -29,6 +30,10 @@ public class CrearContactoPage {
     // ======= ACCIONES =======
     public void submit() {
         driver.findElement(submit).click();
+    }
+
+    public void continuarUnidadControl(){
+        driver.findElement(continuarDatoContacto).click();
     }
 
     public String getError() {
@@ -44,6 +49,17 @@ public class CrearContactoPage {
         wait.until(ExpectedConditions.elementToBeClickable(this.telefono)).sendKeys(telefono);
         wait.until(ExpectedConditions.elementToBeClickable(this.password)).sendKeys(password);
         wait.until(ExpectedConditions.elementToBeClickable(this.rolSelector)).sendKeys(rol);
+        wait.until(ExpectedConditions.elementToBeClickable(this.consentimientoCheckbox)).click();
+    }
+
+    public void fillFormUnidadControl(String nombre, String apellido, String cedula, String email, String telefono, String password) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(this.nombre)).sendKeys(nombre);
+        wait.until(ExpectedConditions.elementToBeClickable(this.apellido)).sendKeys(apellido);
+        wait.until(ExpectedConditions.elementToBeClickable(this.cedula)).sendKeys(cedula);
+        wait.until(ExpectedConditions.elementToBeClickable(this.email)).sendKeys(email);
+        wait.until(ExpectedConditions.elementToBeClickable(this.telefono)).sendKeys(telefono);
+        wait.until(ExpectedConditions.elementToBeClickable(this.password)).sendKeys(password);
         wait.until(ExpectedConditions.elementToBeClickable(this.consentimientoCheckbox)).click();
     }
 }
