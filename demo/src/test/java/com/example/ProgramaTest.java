@@ -109,7 +109,7 @@ public class ProgramaTest {
         listadoProgramasPage.clickVerDetallePrimerPrograma();
         detalleProgramaPage.clickEliminarPrograma();
         detalleProgramaPage.clickConfirmEliminar();
-        assertTrue(listadoProgramasPage.isEliminarProgramaSuccessMessageDisplayed(), "Se ve el mensaje de programa eliminado correctmaente.");
+        assertTrue(listadoProgramasPage.isEliminarProgramaSuccessMessageDisplayed(), "Se ve el mensaje de programa eliminado correctmaente.|");
     }
 
     @AfterEach
