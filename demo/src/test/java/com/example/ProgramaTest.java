@@ -22,7 +22,7 @@ public class ProgramaTest {
     void setUp() {
         //System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
         //System.setProperty("webdriver.edge.driver", "C:\\Users\\jleod\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe");//Nico D
-        //System.setProperty("webdriver.edge.driver", "C:\\Users\\nigom\\OneDrive\\Desktop\\Reto 2\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe"); //Nico Gomez
+        System.setProperty("webdriver.edge.driver", "C:\\Users\\nigom\\OneDrive\\Desktop\\Reto 2\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe"); //Nico Gomez
         //System.setProperty("C:\\Users\\Usuario\\OneDrive\\Escritorio\\InnovaAutomation\\edgedriver_win64\\msedgedriver.exe"); //LucasChiappini
         driver = new EdgeDriver();
         driver.manage().window().maximize();
@@ -107,7 +107,7 @@ public class ProgramaTest {
         homePage.clickCrearCatalogoProgramas();
         crearProgramaPage.completarFormulario("Programa para editar inválido", "Abierto", "Descripción breve.",
                 "Descripción completa.", "Objetivo.", "Requisitos.", "Documentación.",
-                "campo_prueba", "Texto", "Campo de prueba", "02/19/2026", "02/20/2026");
+                "campo_prueba", "Texto", "Campo de prueba", "02/20/2026", "02/20/2026");
         crearProgramaPage.clickSubmit();
         // Editar con todos los campos vacíos
         detalleProgramaPage.clickEditarPrograma();
@@ -150,7 +150,7 @@ public class ProgramaTest {
         homePage.clickCrearCatalogoProgramas();
         crearProgramaPage.completarFormulario("Programa para editar fecha inicio", "Abierto", "Descripción breve.",
                 "Descripción completa.", "Objetivo.", "Requisitos.", "Documentación.",
-                "campo_prueba", "Texto", "Campo de prueba", "02/19/2026", "02/20/2026");
+                "campo_prueba", "Texto", "Campo de prueba", "02/20/2026", "02/20/2026");
         crearProgramaPage.clickSubmit();
         // Editar con fecha de inicio vacía
         detalleProgramaPage.clickEditarPrograma();
