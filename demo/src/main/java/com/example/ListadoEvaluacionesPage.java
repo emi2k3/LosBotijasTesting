@@ -16,7 +16,7 @@ public class ListadoEvaluacionesPage {
     private WebDriver driver;
 
     // URL
-    private String url = "https://saltoinnova.brazilsouth.cloudapp.azure.com/evaluaciones";
+    private String url = "https://saltoinnova.brazilsouth.cloudapp.azure.com";
 
     // ======= LOCALIZADORES Y ELEMENTOS =======
     private By listaDeEvaluacionesText = By.xpath("//h2[@class='fw-normal mb-0']");
@@ -24,6 +24,7 @@ public class ListadoEvaluacionesPage {
     private By nuevaEvaluacionButton = By.xpath("//button[normalize-space()='Crear nueva evaluación']");
     private By volverButton = By.xpath("//a[@class='btn btn-outline-secondary rounded-pill']");
     private By responderEvaluacionButton = By.xpath("//button[normalize-space()='Responder evaluación']");
+    //private By 
 
     //De la lista de evaluaciones
     
