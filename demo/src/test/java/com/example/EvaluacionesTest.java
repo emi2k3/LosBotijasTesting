@@ -22,8 +22,8 @@ public class EvaluacionesTest {
 
     @BeforeEach
     void setUp() {
-        System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
-        //System.setProperty("webdriver.edge.driver", "C:\\Users\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe");//Nico D
+        //System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
+        System.setProperty("webdriver.edge.driver", "C:\\Users\\jleod\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe");//Nico D
         driver = new EdgeDriver();
         driver.manage().window().maximize();
 
@@ -36,9 +36,9 @@ public class EvaluacionesTest {
         listadoResultadosEvaluacionesPage = new ListadoResultadosEvaluacionesPage(driver);
 
         loginPage.open();
-        //loginPage.login("55242946", "12345678nM@");
+        loginPage.login("55242946", "12345678nM@");
         //loginPage.login("34567890", "password"); //Login como funcionario asesor
-        loginPage.login("12345678", "password"); //Login como funcionario administrador
+        //loginPage.login("12345678", "password"); //Login como funcionario administrador
         loginVerificarPage.byPassCode();
     }
 
@@ -47,7 +47,7 @@ public class EvaluacionesTest {
     void responderEvaluación() {
 
         homePage.isHomePageLoaded();
-        homePage.clickResponderEvaluaciones();
+        homePage.clickResultadoEvaluaciones();
         
     }
 
@@ -64,7 +64,7 @@ public class EvaluacionesTest {
         
         homePage.isHomePageLoaded();
         homePage.clickResultadoEvaluaciones();
-       
+
     }
 
     // ===== TEST COMO ASESOR =====

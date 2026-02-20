@@ -23,7 +23,8 @@ public class ListadoContactosPage {
     
     private By nuevoContactoButton = By.xpath("//a[@href='https://saltoinnova.brazilsouth.cloudapp.azure.com/contactos/create']");
     private By editarContactoButton = By.xpath("//a[@title='Editar' and contains(@class,'btn-light')]");
-    
+    private By eliminarContactoButton= By.xpath("/html/body/main/div/div[4]/div/div/div[15]/div/div[3]/button");
+    private By desactivarContactoButton=By.xpath("//*[@id=\"deleteModal3\"]/div/div/div[3]/form/button");
     // ======= CONSTRUCTOR =======
     public ListadoContactosPage(WebDriver driver) {
         this.driver = driver;
@@ -34,11 +35,21 @@ public class ListadoContactosPage {
         driver.get(url);
     }
     
+
     public void clickNuevoContacto() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(nuevoContactoButton)).click();
     }
 
+      public void clickEliminarContacto() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(eliminarContactoButton)).click();
+    }
+
+      public void clickDesactivarContacto() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(desactivarContactoButton)).click();
+    }
     
     public void clickEditarContacto() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

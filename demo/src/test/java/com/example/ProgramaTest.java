@@ -219,6 +219,7 @@ public class ProgramaTest {
         detalleProgramaPage.clickCancelarEliminar();
         assertTrue(detalleProgramaPage.isDetalleDeProgramaTextDisplayed(),
                 "Al cancelar la eliminación debe permanecer en la página de detalle.");
+        assertTrue(listadoProgramasPage.isEliminarProgramaSuccessMessageDisplayed(), "Se ve el mensaje de programa eliminado correctmaente.|");
     }
 
     @AfterEach

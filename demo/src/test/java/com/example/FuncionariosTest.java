@@ -12,84 +12,68 @@ public class FuncionariosTest {
     private LoginPage loginPage;
     private FuncionariosPage funcionariosPage;
     private ListadoContactosPage listadocontactosPage;
-    private RegistroContactoPage registroContactoPage;
+    private LoginVerificarPage loginVerificarPage;
+    private SelectProfilePage selectProfilePage;
     private HomePage homePage;
 
     @BeforeEach
     void setUp() {
         //System.setProperty("webdriver.edge.driver", "C:\\DevTools\\edgedriver_win64\\msedgedriver.exe");//Emma
-        System.setProperty("webdriver.edge.driver", "C:\\Users\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe");//Nico D
+        //System.setProperty("webdriver.edge.driver", "C:\\Users\\jleod\\LosBotijasTesting\\edgedriver_win64\\msedgedriver.exe");//Nico D
+         System.setProperty("webdriver.edge.driver","C:\\Users\\Usuario\\OneDrive\\Escritorio\\InnovaAutomation\\edgedriver_win64\\msedgedriver.exe"); 
         driver = new EdgeDriver();
         driver.manage().window().maximize();
 
         loginPage = new LoginPage(driver);
         funcionariosPage = new FuncionariosPage(driver);
         listadocontactosPage = new ListadoContactosPage(driver);
-        homePage = new HomePage(driver);
-        LoginVerificarPage loginverificarpage = new LoginVerificarPage(driver);
-        RegistroContactoPage registroContactopage = new RegistroContactoPage(driver);
-
+        loginVerificarPage= new LoginVerificarPage(driver);
+        selectProfilePage=new SelectProfilePage(driver);
+        homePage=new HomePage(driver);
+        
         loginPage.open();
-        loginPage.login("12345678", "password");
-        loginverificarpage.byPassCode();
-        //Diferentes tipos de scroll porque no me anda el del profe
-        Actions actions = new Actions(driver);
-        try {
-            for (int i = 0; i < 3; i++) {
-                actions.sendKeys(Keys.END).perform();
-                Thread.sleep(200);
-            }
-        } catch (InterruptedException e) {
-            //si no anduvo no hacer nada.
-        }
-        // Force scrolling the document element to bottom (covers custom scroll containers)
-        ((JavascriptExecutor) driver).executeScript("if(document.scrollingElement){document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;}else{window.scrollTo(0, document.body.scrollHeight);} ");
+        loginPage.enterCedula("55555555"); // es una cuenta dual.
+                loginPage.enterPassword("password");
+                loginPage.clickLoginButton();
+                loginVerificarPage.byPassCode();
+             selectProfilePage.selectProfile("funcionario");
+       
     }
 
     @Test
-    void crearFuncionarioConCredencialesRepetidas() {
-        homePage.clickVerFuncionarios();
+    void crearFuncionarioConCredencialesRepetidas() {// aca poner datos que ya existen en el sistema.
         funcionariosPage.clickCreate();
         funcionariosPage.fillForm(
-
-                "Juan", "Pérez",
-                "71451123",
-                "099345678",
-                "juan.perez@saltoinnova.gub.uy",
-                "passworD1@"
-
+                "Test", "Test",
+                "12345678",
+                "12345678",
+                "carlos.rodriguez@saltoinnova.gub.uy",
+                "password",
+                "Consulta"
         );
-        //Diferentes tipos de scroll porque no me anda el del profe
-        Actions actions = new Actions(driver);
-        try {
-            for (int i = 0; i < 3; i++) {
-                actions.sendKeys(Keys.END).perform();
-                Thread.sleep(200);
-            }
-        } catch (InterruptedException e) {
-            //si no anduvo no hacer nada.
-        }
-        // Force scrolling the document element to bottom (covers custom scroll containers)
-        ((JavascriptExecutor) driver).executeScript("if(document.scrollingElement){document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;}else{window.scrollTo(0, document.body.scrollHeight);} ");
-        funcionariosPage.selectRole("admin");
         funcionariosPage.submit();
+        assertTrue(funcionariosPage.isAlertVisible());
+    }
 
+     @Test
+    void crearFuncionarioTodoValido() {// aca poner datos que no esten repetidos y usen el estandar correcto.
+        funcionariosPage.clickCreate();
+        funcionariosPage.fillForm(
+                "Funcionario", "Test",
+                "455566734",
+                "098187219",
+                "testfuncionario@gmail.com",
+                "!Lucaswachin7",
+                "Consulta"
+        );
+        funcionariosPage.submit();
+        assertTrue(funcionariosPage.isAlertVisible());
     }
 
     @Test
     void editarFuncionarioTodoValido() {
-        homePage.clickVerFuncionarios();
+
         listadocontactosPage.clickEditarContacto();
-        funcionariosPage.fillForm(
-
-                "Dual", 
-                "Perfil",
-                registroContactoPage.generarCedula(),
-                "099045678",
-                "dual.perfil@demo.com",
-                null
-
-        );
         //Diferentes tipos de scroll porque no me anda el del profe
         Actions actions = new Actions(driver);
         try {
@@ -102,121 +86,78 @@ public class FuncionariosTest {
         }
         // Force scrolling the document element to bottom (covers custom scroll containers)
         ((JavascriptExecutor) driver).executeScript("if(document.scrollingElement){document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;}else{window.scrollTo(0, document.body.scrollHeight);} ");
-        funcionariosPage.selectRole("admin");
+        // Finally ensure the submit is in view
+        WebElement submit = driver.findElement(By.id("submit")); // Adjust the locator as needed
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior:'auto', block:'center'});", submit);
+
+        funcionariosPage.fillForm("juan", "perez", "6666666", "123456789", "juan.perez@demo.com", "password", "Consulta");
         funcionariosPage.submit();
+        assertTrue(funcionariosPage.isAlertVisible());
     
     }
 
+     @Test
+void cerrarPrograma() {
+    funcionariosPage.verProgramaClick();
+    funcionariosPage.clickProgramaCard();
+    funcionariosPage.clickEditarPrograma();
+    funcionariosPage.seleccionarEstadoCerrado();
+    funcionariosPage.clickActualizar();
+    assertTrue(driver.getPageSource().contains("Cerrado"));
+}
+
     @Test
-    public void EditarFuncionario_email_ya_utilizado() {
-        homePage.clickVerFuncionarios();
+    public void Caso3() {
+
         listadocontactosPage.clickEditarContacto();
 
-        funcionariosPage.fillForm(
-
-            "juan", 
-            "perez", 
-            registroContactoPage.generarCedula(), 
-            "099045678", 
-            "juan.perez@saltoinnova.gub.uy", 
-            null
-
-        );
-
+        funcionariosPage.fillForm("juan", "perez", "6666666", "123456789", "juan.perez@demo.com", "password", "Consulta");
         funcionariosPage.submit();
+        assertTrue(funcionariosPage.isAlertVisible());
 
     }
 
     @Test
-    public void EditarFuncionario_cedula_ya_utilizada() {
-        homePage.clickVerFuncionarios();
+    public void Caso4() {
+
         listadocontactosPage.clickEditarContacto();
 
-        funcionariosPage.fillForm(
-
-            "juan",
-         "perez",
-         "7145112",
-         "099045678",
-         registroContactoPage.generateRandomEmail(),
-         null
-
-        );
+        funcionariosPage.fillForm("juan", "perez", "6666666", "123456789", "juan.perez@demo.com", "password", "Consulta");
         funcionariosPage.submit();
 
     }
 
     @Test
-    public void EditarFuncionario_Email_ya_utilizado() {
-        homePage.clickVerFuncionarios();
+    public void Caso5() {
+
         listadocontactosPage.clickEditarContacto();
 
-        funcionariosPage.fillForm(
-
-            "juan",
-         "perez",
-         registroContactoPage.generarCedula(),
-          "099045678",
-          "juan.perez@saltoinnova.gub.uy",
-           null
-
-        );
-        funcionariosPage.selectRole("Consulta");
+        funcionariosPage.fillForm("juan", "perez", "6666666", "123456789", "juan.perez@demo.com", "password", "Consulta");
         funcionariosPage.submit();
 
     }
 
     @Test
-    public void EditarContacto_Cédula_ya_utilizada() {
-        homePage.clickVerContactos();
+    public void Caso6() {
+
         listadocontactosPage.clickEditarContacto();
 
-        funcionariosPage.fillForm(
-            
-            "juan",
-            "perez",
-            "55242946",
-            "099045678",
-            registroContactoPage.generateRandomEmail(),
-            null
-
-        );
-
-        funcionariosPage.selectRole("Titular");
+        funcionariosPage.fillForm("juan", "perez", "6666666", "123456789", "juan.perez@demo.com", "password", "Consulta");
         funcionariosPage.submit();
+        assertTrue(funcionariosPage.isAlertVisible());
 
     }
 
     @Test
-    public void CrearFuncionario_Cédula_y_Email_ya_utilizados() {
+    public void Caso7() {
 
-        homePage.clickVerContactos();
-        funcionariosPage.clickCreate();
-        funcionariosPage.fillForm(
+        listadocontactosPage.clickEditarContacto();
 
-                "Juan", "Pérez",
-                "71451123",
-                "099345678",
-                "nicod@gmail.com",
-                null
-
-        );
-        //Diferentes tipos de scroll porque no me anda el del profe
-        Actions actions = new Actions(driver);
-        try {
-            for (int i = 0; i < 3; i++) {
-                actions.sendKeys(Keys.END).perform();
-                Thread.sleep(200);
-            }
-        } catch (InterruptedException e) {
-            //si no anduvo no hacer nada.
-        }
-        // Force scrolling the document element to bottom (covers custom scroll containers)
-        ((JavascriptExecutor) driver).executeScript("if(document.scrollingElement){document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;}else{window.scrollTo(0, document.body.scrollHeight);} ");
-        funcionariosPage.selectRole("admin");
+        funcionariosPage.fillForm("juan", "perez", "6666666", "123456789", "juan.perez@demo.com", "password", "Consulta");
         funcionariosPage.submit();
 
     }
+
 
     @AfterEach
     void tearDown() {
