@@ -14,8 +14,10 @@ public class ContactosTest {
     private CrearContactoPage nuevoContactoPage;
     private HomePage homePage;
     private CrearPostulacionPage crearPostulacionPage;
-
+    private SelectProfilePage selectProfilePage;
     private LoginVerificarPage loginVerificarPage;
+    private UnidadesAtencionPage unidadesAtencionPage;
+    private ListadoContactosPage listadoContactosPage;
 
     @BeforeEach
     void setUp() {
@@ -34,6 +36,9 @@ public class ContactosTest {
         homePage = new HomePage(driver);
         loginVerificarPage = new LoginVerificarPage(driver);
         crearPostulacionPage=new CrearPostulacionPage(driver);
+        selectProfilePage =new SelectProfilePage(driver); 
+        unidadesAtencionPage = new UnidadesAtencionPage(driver);
+        listadoContactosPage=new ListadoContactosPage(driver);
     }
 
     @Test
@@ -111,6 +116,28 @@ assertTrue(crearPostulacionPage.camposSiguenVacios());
         assertTrue(homePage.isWelcomeTextDisplayed(), "El texto de bienvenida se muestra, el login fue exitoso.");
 
         // TEST CRASHEA POR LAS COOKIES, PENDIENTE DE SOLUCIONAR.
+    }
+
+    @Test
+    void unidadAtencionTodoValido(){
+        loginPage.open();
+        loginPage.enterCedula("55555555"); // es una cuenta dual.
+        loginPage.enterPassword("password");
+        loginPage.clickLoginButton();
+        loginVerificarPage.byPassCode();
+        selectProfilePage.selectProfile("contacto"); 
+        homePage.clickVerUnidadesAtencion();
+        unidadesAtencionPage.clickCrearUnidad();
+        nuevoContactoPage.fillFormUnidadControl(
+                "Juan",
+                "Perez",
+                "72734370",
+                "JP18@example.com",
+                "099143567",
+                "!Juanperezwachin7");
+
+        nuevoContactoPage.continuarUnidadControl();
+        loginVerificarPage.byPassCode();
     }
 
     @AfterEach

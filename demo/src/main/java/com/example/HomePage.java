@@ -71,8 +71,9 @@ private By confirmarDesactivarBtn =
     private By accionesButton = By.xpath("//a[@class='btn btn-outline-primary btn-sm px-3'][contains(text(),'Acciones')]");
 
     //Unidades de atencion
-    private By verUnidadesAtencionButton = By.xpath("//a[@class='btn btn-outline-primary btn-sm px-3'][contains(text(),'Evaluaciones')]");
-private By evaluacionesButton =
+    private By verUnidadesAtencionButton =
+    By.xpath("//*[@id='app']/main/div/div/div[2]/div[1]/div/div/div[2]/a");
+    private By evaluacionesButton =
         By.xpath("//*[@id=\"app\"]/main/div/div/div[2]/div[2]/div/div/div[2]/a[1]");
     //Para hacer logout
     private By userMenuButton = By.xpath("//span[@class='text-white fw-semibold']");
@@ -184,7 +185,9 @@ driver.findElement(desactivarCuentaButton).click();
     }
 
     public void clickVerUnidadesAtencion() {
-        driver.findElement(verUnidadesAtencionButton).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        wait.until(ExpectedConditions.elementToBeClickable(verUnidadesAtencionButton)).click();
     }
 
     
